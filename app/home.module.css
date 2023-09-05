@@ -1,0 +1,12 @@
+.floatingLabel {
+  position: absolute;
+  border-radius: 60px;
+  border: 1px solid rgba(245, 248, 250, 0.6);
+  background: linear-gradient(
+    180deg,
+    rgba(245, 248, 250, 0.12) 0%,
+    rgba(245, 248, 250, 0.6) 100%
+  );
+  box-shadow: -4px 4px 12px 0px rgba(2, 22, 38, 0.11);
+  backdrop-filter: blur(5px);
+}

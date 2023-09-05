@@ -1,0 +1,3 @@
+.graphValue:not(:hover) > * {
+  display: none;
+}
