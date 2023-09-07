@@ -4,7 +4,7 @@
 import { Button } from "@/components/ui/button";
 import { FormOption } from "@/components/ui/form-option";
 import { Graph } from "@/components/ui/graph";
-import { Input } from "@/components/ui/input";
+import { NumberInput } from "@/components/ui/number-input";
 import { Result } from "@/components/ui/result";
 import {
   Wizard,
@@ -33,7 +33,7 @@ const steps = {
         </WizardContentSubTitle>
         <div className="flex flex-col sm:flex-row gap-3">
           <FormOption variant="selected">Des services</FormOption>
-          <FormOption disabled>Des marchandises</FormOption>
+          <FormOption disabled>Des marchandises (bientôt)</FormOption>
         </div>
         <WizardContentActions>
           <Button className="w-full sm:w-auto" onClick={() => goToStep("ca")}>
@@ -54,13 +54,10 @@ const steps = {
           À partir d'un certain montant de chiffre d'affaires un changement de
           statut peut te faire gagner de l'argent.
         </WizardContentSubTitle>
-        <Input
-          type="number"
-          onChange={(event) => patchState({ ca: Number(event.target.value) })}
+        <NumberInput
+          onChange={(value) => patchState({ ca: value })}
           value={state.ca}
           placeholder="0"
-          min="0"
-          step="1000"
           afterIcon="€/an"
         />
         <WizardContentActions>
@@ -92,15 +89,10 @@ const steps = {
           Tu peux payer moins de charges sociales en fonction du revenu que tu
           te verses.
         </WizardContentSubTitle>
-        <Input
-          type="number"
-          onChange={(event) =>
-            patchState({ rémunération: Number(event.target.value) })
-          }
+        <NumberInput
+          onChange={(value) => patchState({ rémunération: value })}
           value={state.rémunération}
           placeholder="0"
-          min="0"
-          step="500"
           afterIcon="€/mois"
         />
         <WizardContentActions>
@@ -206,15 +198,10 @@ const steps = {
             <h3 className="text-3xl font-bold mb-2">Si tu passes en EURL...</h3>
             <p className="text-secondary mb-2">Revenu net mensuel</p>
             <div>
-              <Input
-                type="number"
-                onChange={(event) =>
-                  patchState({ rémunération: Number(event.target.value) })
-                }
+              <NumberInput
+                onChange={(value) => patchState({ rémunération: value })}
                 value={state.rémunération}
                 placeholder="0"
-                min="0"
-                step="500"
                 afterIcon="€/mois"
               />
               {eurl.trésorerie < 0 && (
