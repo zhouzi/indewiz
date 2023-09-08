@@ -21,7 +21,7 @@ const Graph = ({ greens, reds }: GraphProps) => {
       <div className="flex justify-end">
         <div className="flex flex-col items-center px-8">
           <div>{greensTotal}€</div>
-          <div style={{ height: `${greensTotal / 1000}px` }}>
+          <div style={{ height: `${greensTotal / 600}px` }}>
             {greens.map((green) => (
               <div
                 key={green.label}
@@ -43,7 +43,7 @@ const Graph = ({ greens, reds }: GraphProps) => {
       <div className="border border-b-0 border-secondary-lighter" />
       <div className="flex justify-start">
         <div className="flex flex-col items-center px-8">
-          <div style={{ height: `${redsTotal / 1000}px` }}>
+          <div style={{ height: `${redsTotal / 600}px` }}>
             {reds.map((red) => (
               <div
                 key={red.label}
