@@ -178,11 +178,11 @@ const steps = {
                 ]}
                 reds={[
                   {
-                    label: "URSSAF",
+                    label: "Cotisations",
                     value: microEntreprise.cotisations,
                     color: "#99312E",
                   },
-                  { label: "IR", value: microEntreprise.ir, color: "#F72019" },
+                  { label: "IR", value: microEntreprise.ir, color: "#E5605C" },
                 ]}
               />
             </div>
@@ -196,7 +196,9 @@ const steps = {
         <div className="flex flex-1 flex-col gap-4">
           <article className="p-8 rounded-lg bg-white">
             <h3 className="text-3xl font-bold mb-2">Si tu passes en EURL...</h3>
-            <p className="text-secondary mb-2">Revenu net mensuel</p>
+            <p className="text-secondary mb-2">
+              Revenu net mensuel après impôt
+            </p>
             <div>
               <NumberInput
                 onChange={(value) => patchState({ rémunération: value })}
@@ -206,7 +208,7 @@ const steps = {
               />
               {eurl.trésorerie < 0 && (
                 <p className="text-red-700 text-sm mt-1">
-                  Tu ne fais pas assez de CA pour ce revenu
+                  Tu ne fais pas assez de CA pour atteindre cet objectif
                 </p>
               )}
             </div>
@@ -222,7 +224,7 @@ const steps = {
                 ]}
                 reds={[
                   {
-                    label: "URSSAF",
+                    label: "Cotisations",
                     value: eurl.cotisations,
                     color: "#99312E",
                   },
