@@ -18,7 +18,7 @@ const Header = () => {
       <p className="flex-1 text-center sm:text-left md:text-right text-secondary">
         Des remarques ? Des idées d'évolution ?{" "}
         <Link
-          href="https://docs.google.com/forms/d/1kqs_hUfEEqkDXx3armmq7z9i5CSFtynBCtMV_sJcy3Y/prefill"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSee1ebfvyT2z7IiFFxdYujP3nyieMmoha61bwALN8Ac_afUHg/viewform"
           target="_blank"
         >
           Contacte-nous
