@@ -9,12 +9,19 @@ import { Footer } from "@/components/footer";
 
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title:
-    "IndeWIZ - Trouve enfin le statut qui convient le mieux à ton business",
-  description:
-    "En se basant sur ta situation et tes objectifs, IndeWIZ t'indiquera si faire évoluer le statut juridique de ta micro-entreprise te permettra de gagner de l'argent en réduisant tes cotisations et tes impôts.",
-};
+const title =
+  "IndeWIZ - Trouve enfin le statut qui convient le mieux à ton business";
+const description =
+  "En se basant sur ta situation et tes objectifs, IndeWIZ t'indiquera si faire évoluer le statut juridique de ta micro-entreprise te permettra de gagner de l'argent en réduisant tes cotisations et tes impôts.";
+
+export const metadata = {
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+  },
+} satisfies Metadata;
 
 export default function RootLayout({
   children,
