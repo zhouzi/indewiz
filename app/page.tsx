@@ -20,7 +20,7 @@ export default function Home() {
           </h1>
           <p className="text-secondary mb-8 md:mb-12 text-xl">
             Contrairement à une micro-entreprise, une société permet d'optimiser
-            ta rémunération et conduire à une économie de cotisations et
+            ta rémunération qui peut conduire à une économie de cotisations et
             d'impôts.
           </p>
           <Button asChild>
