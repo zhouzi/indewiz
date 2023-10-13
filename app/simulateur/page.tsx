@@ -9,6 +9,7 @@ import { Result } from "@/components/ui/result";
 import { calculerEURL } from "@/lib/calculerEURL";
 import { calculerME } from "@/lib/calculerME";
 import { produce } from "immer";
+import { TrendingDown, TrendingUp } from "lucide-react";
 import { FunctionComponent, useEffect, useReducer, useState } from "react";
 
 type StepId = "nature" | "ca" | "rémunération" | "résultat";
@@ -132,28 +133,32 @@ const steps = {
     const différence = eurl.revenu + eurl.trésorerie - microEntreprise.revenu;
 
     return (
-      <div className="max-w-7xl m-auto flex flex-col md:flex-row gap-4">
-        <div className="flex flex-1 flex-col gap-4">
-          <article className="p-8 rounded-lg bg-white">
-            <h3 className="text-3xl font-bold text-center mb-4">
-              Changement de statut ?
-            </h3>
-            <p className="text-center">
-              {différence > 0 ? (
-                <Result>
-                  Oui, ça pourrait être intéressant financièrement
-                </Result>
-              ) : (
-                <Result variant="negative">
-                  Non, ça pourrait ne pas être intéressant financièrement
-                </Result>
-              )}
-            </p>
-          </article>
-          <article className="p-8 rounded-lg bg-white">
-            <h3 className="text-3xl font-bold mb-2">Ta situation actuelle</h3>
-            <p className="text-secondary">En micro-entreprise (EI)</p>
-            <div className="mt-8 flex justify-center">
+      <div className="flex gap-20">
+        <div>
+          <h2 className="text-xl mb-4">Changement de statut</h2>
+          {différence > 0 ? (
+            <div className="flex items-center gap-2">
+              <span className="rounded-full bg-positive-light text-positive-dark inline-flex p-3">
+                <TrendingUp size={16} />
+              </span>{" "}
+              +{différence}€/an en EURL
+            </div>
+          ) : (
+            <div className="flex items-center gap-2">
+              <span className="rounded-full bg-negative-light text-negative-dark inline-flex p-3">
+                <TrendingDown size={16} />
+              </span>{" "}
+              -{différence}€/an en EURL
+            </div>
+          )}
+          <Button onClick={() => goToStep("nature")} className="mt-20">
+            Relance le simulateur
+          </Button>
+        </div>
+        <div className="flex-1">
+          <div>
+            <h2>En micro-entreprise</h2>
+            <div className="flex justify-center">
               <Graph
                 greens={[
                   {
@@ -172,33 +177,10 @@ const steps = {
                 ]}
               />
             </div>
-          </article>
-          <article className="hidden md:flex flex-1 p-8 rounded-lg bg-white md:flex-col md:items-center md:justify-center">
-            <Button onClick={() => goToStep("nature")}>
-              Relance le simulateur
-            </Button>
-          </article>
-        </div>
-        <div className="flex flex-1 flex-col gap-4">
-          <article className="p-8 rounded-lg bg-white">
-            <h3 className="text-3xl font-bold mb-2">Si tu passes en EURL...</h3>
-            <p className="text-secondary mb-2">
-              Revenu net mensuel après impôt
-            </p>
-            <div>
-              <NumberInput
-                onChange={(value) => patchState({ rémunération: value })}
-                value={state.rémunération}
-                placeholder="0"
-                afterIcon="€/mois"
-              />
-              {eurl.trésorerie < 0 && (
-                <p className="text-red-700 text-sm mt-1">
-                  Tu ne fais pas assez de CA pour atteindre cet objectif
-                </p>
-              )}
-            </div>
-            <div className="mt-8 flex justify-center">
+          </div>
+          <div>
+            <h2>En EURL</h2>
+            <div className="flex justify-center">
               <Graph
                 greens={[
                   { label: "Revenu", value: eurl.revenu, color: "#63CC3D" },
@@ -229,36 +211,7 @@ const steps = {
                 )}
               />
             </div>
-          </article>
-          <article className="flex-1 p-8 rounded-lg bg-white">
-            <h3 className="text-3xl font-bold text-center mb-2">
-              En conclusion
-            </h3>
-            <p className="text-secondary mb-4 text-center">
-              Si tu passais en EURL, ça représenterait :
-            </p>
-            {différence > 0 ? (
-              <p className="text-center">
-                <strong className="font-bold">Un gain de</strong>
-                <br />
-                <Result>+{différence}€/an</Result>
-              </p>
-            ) : (
-              <p className="text-center">
-                <strong className="font-bold">Une perte de</strong>
-                <br />
-                <Result variant="negative">-{Math.abs(différence)}€/an</Result>
-              </p>
-            )}
-          </article>
-          <article className="md:hidden p-8 rounded-lg bg-white text-center">
-            <Button
-              className="w-full sm:w-auto"
-              onClick={() => goToStep("nature")}
-            >
-              Relance le simulateur
-            </Button>
-          </article>
+          </div>
         </div>
       </div>
     );
