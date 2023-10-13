@@ -11,7 +11,7 @@ const Header = () => {
         className="inline-flex gap-2 items-center sm:pr-4 mb-2 sm:mb-0"
       >
         <Logo />
-        <span className="px-2 py-1 bg-white text-secondary uppercase font-medium text-sm rounded">
+        <span className="px-2 py-1 leading-none bg-secondary-lightest text-primary-dark uppercase font-medium text-sm rounded">
           beta
         </span>
       </NextLink>

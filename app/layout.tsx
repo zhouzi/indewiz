@@ -33,7 +33,7 @@ export default function RootLayout({
       <Head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </Head>
-      <body className={cn(dmSans.className, "text-text bg-background")}>
+      <body className={cn(dmSans.className, "text-text")}>
         <Header />
         {children}
         <Footer />
