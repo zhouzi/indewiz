@@ -17,7 +17,7 @@ type StepId = "nature" | "ca" | "rémunération" | "résultat";
 const steps = {
   nature: ({ goToStep }) => (
     <>
-      <h2 className="text-3xl font-bold mb-4">Qu'est-ce que tu vends ?</h2>
+      <h2 className="text-3xl font-bold mb-2">Qu'est-ce que tu vends ?</h2>
       <p className="text-secondary mb-9">
         En micro-entreprise tu paies plus ou moins de cotisations selon le type
         de ton activité.
@@ -35,7 +35,7 @@ const steps = {
   ),
   ca: ({ goToStep, state, patchState }) => (
     <>
-      <h2 className="text-3xl font-bold mb-4">
+      <h2 className="text-3xl font-bold mb-2">
         Quel chiffre d'affaires tu prévois de réaliser cette année ?
       </h2>
       <p className="text-secondary mb-9">
@@ -67,7 +67,7 @@ const steps = {
   ),
   rémunération: ({ goToStep, state, patchState }) => (
     <>
-      <h2 className="text-3xl font-bold mb-4">
+      <h2 className="text-3xl font-bold mb-2">
         De quel montant net tu as besoin pour vivre par mois ?
       </h2>
       <p className="text-secondary mb-9">
@@ -272,11 +272,15 @@ export default function Simulateur() {
         )}
       />
       <main className="max-w-7xl m-auto py-36 px-4">
-        {currentQuestion <= totalQuestions && (
-          <p className="text-secondary text-sm mb-4">
-            Question {currentQuestion}/{totalQuestions}
-          </p>
-        )}
+        <p className="text-secondary text-sm mb-4">
+          {currentQuestion <= totalQuestions ? (
+            <>
+              Question {currentQuestion}/{totalQuestions}
+            </>
+          ) : (
+            <>Résultat</>
+          )}
+        </p>
         <Step
           state={state}
           goToStep={(step: StepId) =>
