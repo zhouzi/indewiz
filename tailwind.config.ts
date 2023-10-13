@@ -13,16 +13,17 @@ const config: Config = {
         "primary-dark": "#095594",
         text: "#021626",
         background: "#F5F7FA",
-        secondary: "#5C6166",
+        secondary: "#475766",
         "secondary-lighter": "#A1AAB2",
         "secondary-lightest": "#CFDAE5",
-        "positive-light": "#E8FAE1",
-        "positive-dark": "#268006",
-        "negative-light": "#FAE2E1",
-        "negative-dark": "#800A06",
+        "positive-light": "#E7FAE1",
+        "positive-dark": "#021626",
+        "negative-light": "#FAE1EA",
+        "negative-dark": "#6F213D",
       },
     },
   },
   plugins: [],
 };
+
 export default config;
