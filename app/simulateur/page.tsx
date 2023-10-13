@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { FormOption } from "@/components/ui/form-option";
 import { Graph } from "@/components/ui/graph";
 import { NumberInput } from "@/components/ui/number-input";
-import { Result } from "@/components/ui/result";
+import { Stepper } from "@/components/ui/stepper";
 import { calculerEURL } from "@/lib/calculerEURL";
 import { calculerME } from "@/lib/calculerME";
 import { produce } from "immer";
@@ -17,7 +17,6 @@ type StepId = "nature" | "ca" | "rémunération" | "résultat";
 const steps = {
   nature: ({ goToStep }) => (
     <>
-      <p className="text-secondary text-sm mb-4">Question 1/3</p>
       <h2 className="text-3xl font-bold mb-4">Qu'est-ce que tu vends ?</h2>
       <p className="text-secondary mb-9">
         En micro-entreprise tu paies plus ou moins de cotisations selon le type
@@ -36,7 +35,6 @@ const steps = {
   ),
   ca: ({ goToStep, state, patchState }) => (
     <>
-      <p className="text-secondary text-sm mb-4">Question 2/3</p>
       <h2 className="text-3xl font-bold mb-4">
         Quel chiffre d'affaires tu prévois de réaliser cette année ?
       </h2>
@@ -69,7 +67,6 @@ const steps = {
   ),
   rémunération: ({ goToStep, state, patchState }) => (
     <>
-      <p className="text-secondary text-sm mb-4">Question 3/3</p>
       <h2 className="text-3xl font-bold mb-4">
         De quel montant net tu as besoin pour vivre par mois ?
       </h2>
@@ -258,17 +255,38 @@ function reducer(draft: State, action: Action) {
 
 export default function Simulateur() {
   const [state, dispatch] = useReducer(produce(reducer), initialState);
-  const Step = steps[state.step];
+
+  const stepsList = Object.entries(steps);
+  const currentStepIndex = stepsList.findIndex(([id]) => id === state.step);
+  const [, Step] = stepsList[currentStepIndex];
+
+  // The last step is the result which is not a question
+  const totalQuestions = stepsList.length - 1;
+  const currentQuestion = currentStepIndex + 1;
 
   return (
-    <main className="max-w-7xl m-auto py-6 px-4">
-      <Step
-        state={state}
-        goToStep={(step: StepId) => dispatch({ type: "goToStep", step: step })}
-        patchState={(patch: Partial<State>) =>
-          dispatch({ type: "patchState", patch })
-        }
+    <>
+      <Stepper
+        progress={Array.from({ length: stepsList.length - 1 }).map(
+          (_, index) => index < currentQuestion
+        )}
       />
-    </main>
+      <main className="max-w-7xl m-auto py-36 px-4">
+        {currentQuestion <= totalQuestions && (
+          <p className="text-secondary text-sm mb-4">
+            Question {currentQuestion}/{totalQuestions}
+          </p>
+        )}
+        <Step
+          state={state}
+          goToStep={(step: StepId) =>
+            dispatch({ type: "goToStep", step: step })
+          }
+          patchState={(patch: Partial<State>) =>
+            dispatch({ type: "patchState", patch })
+          }
+        />
+      </main>
+    </>
   );
 }

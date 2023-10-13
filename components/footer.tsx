@@ -3,7 +3,7 @@ import { Link } from "./ui/link";
 
 const Footer = () => {
   return (
-    <footer className="max-w-7xl m-auto py-6 sm:mt-10 px-4">
+    <footer className="max-w-7xl m-auto px-4">
       <p className="text-secondary text-sm mb-3">
         IndeWIZ est un simulateur{" "}
         <Link href="https://github.com/zhouzi/indewiz" target="_blank">
