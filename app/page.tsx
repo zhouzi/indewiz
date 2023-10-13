@@ -12,16 +12,15 @@ export default function Home() {
       <div className="flex-1 flex flex-col justify-center md:pr-8">
         <div className="max-w-2xl">
           <h1 className="font-medium text-4xl mb-4">
-            Trouve enfin le statut qui convient le mieux à ton{" "}
+            Paie moins d'impôts et de cotisations en optimisant ta{" "}
             <strong className="bg-gradient-to-t from-primary-dark to-primary bg-clip-text text-transparent">
-              business
+              rémunération
             </strong>
           </h1>
           <p className="text-secondary mb-8 md:mb-12 text-xl">
-            En se basant sur ta situation et tes objectifs, IndeWIZ t'indiquera
-            si faire évoluer le statut juridique de ta micro-entreprise te
-            permettra de gagner de l'argent en réduisant tes cotisations et tes
-            impôts.
+            Contrairement à une micro-entreprise, une société permet d'optimiser
+            ta rémunération et conduire à une économie de cotisations et
+            d'impôts.
           </p>
           <Button asChild>
             <Link href="/simulateur">Lance le simulateur</Link>
