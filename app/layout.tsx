@@ -5,7 +5,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { Header } from "@/components/header";
 import { cn } from "@/lib/utils";
 import Head from "next/head";
-import { Footer } from "@/components/footer";
 
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
