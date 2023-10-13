@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import NextLink from "next/link";
 import { Logo } from "./ui/logo";
-import { Link } from "./ui/link";
+import { Button } from "./ui/button";
 
 const Header = () => {
   return (
@@ -16,13 +16,14 @@ const Header = () => {
         </span>
       </NextLink>
       <p className="flex-1 text-center sm:text-left md:text-right text-secondary">
-        Des remarques ? Des idées d'évolution ?{" "}
-        <Link
-          href="https://docs.google.com/forms/d/e/1FAIpQLSee1ebfvyT2z7IiFFxdYujP3nyieMmoha61bwALN8Ac_afUHg/viewform"
-          target="_blank"
-        >
-          Contacte-nous
-        </Link>
+        <Button variant="secondary" size="small" asChild>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSee1ebfvyT2z7IiFFxdYujP3nyieMmoha61bwALN8Ac_afUHg/viewform"
+            target="_blank"
+          >
+            Contacte-nous
+          </a>
+        </Button>
       </p>
     </header>
   );

@@ -36,7 +36,6 @@ export default function RootLayout({
       <body className={cn(dmSans.className, "text-text")}>
         <Header />
         {children}
-        <Footer />
         <Analytics />
       </body>
     </html>

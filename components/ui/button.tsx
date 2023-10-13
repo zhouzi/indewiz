@@ -5,17 +5,22 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "py-4 px-12 text-xl rounded border border-transparent inline-flex justify-center",
+  "rounded border border-transparent inline-flex justify-center",
   {
     variants: {
       variant: {
         primary:
-          "bg-gradient-to-t from-primary-dark to-primary font-bold text-white",
+          "bg-gradient-to-t from-primary-dark to-primary font-bold text-white border-primary-dark",
         secondary: "border-primary-dark text-primary-dark font-medium",
+      },
+      size: {
+        small: "py-2 px-6",
+        normal: "py-4 px-12 text-xl",
       },
     },
     defaultVariants: {
       variant: "primary",
+      size: "normal",
     },
   }
 );
@@ -27,11 +32,11 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
       <Comp
-        className={cn(buttonVariants({ variant, className }))}
+        className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
       />
