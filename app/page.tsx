@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { TrendingUp, TrendingDown } from "lucide-react";
 
 import styles from "./home.module.css";
 import { cn } from "@/lib/utils";
@@ -28,38 +29,81 @@ export default function Home() {
         </div>
       </div>
       <div
-        className="relative self-center mt-8 md:mt-0"
+        className={cn(
+          styles.heroPictureContainer,
+          "relative self-center mt-8 md:mt-0"
+        )}
         style={{ maxWidth: "70%" }}
       >
         <span
-          className={cn(styles.floatingLabel, "px-6 py-1 text-xl font-medium")}
+          className={cn(
+            styles.floatingLabel,
+            "px-6 py-1 text-xl font-medium text-primary-dark -z-10"
+          )}
+          style={{
+            top: "8%",
+            right: 0,
+            transform: "translateX(30%)",
+          }}
+        >
+          <span className="bg-negative-light text-negative-dark inline-flex p-2 rounded-full mr-1 align-middle">
+            <TrendingDown size={16} />
+          </span>
+          -4000€/an{" "}
+          <small className="text-secondary text-sm font-normal">en SASU</small>
+        </span>
+        <span
+          className={cn(
+            styles.floatingLabel,
+            "px-6 py-1 text-xl font-medium text-primary-dark"
+          )}
+          style={{
+            top: "24%",
+            left: "14%",
+          }}
+        >
+          EURL ?
+        </span>
+        <span
+          className={cn(
+            styles.floatingLabel,
+            "px-6 py-1 text-xl font-medium text-primary-dark -z-10"
+          )}
+          style={{
+            top: "40%",
+            right: "10%",
+          }}
+        >
+          EI ?
+        </span>
+        <span
+          className={cn(
+            styles.floatingLabel,
+            "px-6 py-1 text-xl font-medium text-primary-dark"
+          )}
+          style={{
+            top: "52%",
+            left: 0,
+          }}
+        >
+          SASU ?
+        </span>
+        <span
+          className={cn(
+            styles.floatingLabel,
+            "px-6 py-1 text-xl font-medium text-primary-dark"
+          )}
           style={{
             top: "80%",
             left: 0,
-            transform: "translateX(-20%)",
+            transform: "translateX(-30%)",
           }}
         >
-          EI
-        </span>
-        <span
-          className={cn(styles.floatingLabel, "px-6 py-1 text-xl font-medium")}
-          style={{
-            top: "40%",
-            right: 0,
-            transform: "translateX(60%)",
-          }}
-        >
-          EURL
-        </span>
-        <span
-          className={cn(styles.floatingLabel, "px-6 py-1 text-xl font-medium")}
-          style={{
-            top: "20%",
-            left: 0,
-            transform: "translateX(-40%)",
-          }}
-        >
-          SASU
+          <span className="bg-positive-light text-positive-dark inline-flex p-2 rounded-full mr-1 align-middle">
+            <TrendingUp size={16} />
+          </span>
+          +3000€/an{" "}
+          <small className="text-secondary text-sm font-normal">en EURL</small>
         </span>
         <img src="/home-picture.png" alt="" width={369} height="auto" />
       </div>
