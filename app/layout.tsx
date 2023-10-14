@@ -8,10 +8,9 @@ import Head from "next/head";
 
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
-const title =
-  "IndeWIZ - Trouve enfin le statut qui convient le mieux à ton business";
+const title = "IndeWIZ - Simulateurs pour indépendants";
 const description =
-  "En se basant sur ta situation et tes objectifs, IndeWIZ t'indiquera si faire évoluer le statut juridique de ta micro-entreprise te permettra de gagner de l'argent en réduisant tes cotisations et tes impôts.";
+  "IndeWIZ est une collection de simulateurs qui mettent en lumière les avantages et inconvénients des différents statuts juridiques. Plus qu'un comparatif, ils permettent une étude des différentes stratégies répondants à une variété de besoins.";
 
 export const metadata = {
   title,

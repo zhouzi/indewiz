@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <Stepper progress={[false]} />
-      <main className="flex flex-col md:flex-row max-w-7xl m-auto py-36 px-4">
+      <main className="flex flex-col md:flex-row max-w-7xl m-auto py-28 px-4">
         <div className="flex-1 flex flex-col justify-center md:pr-8">
           <div className="max-w-2xl">
             <h1 className="font-medium text-4xl mb-4">
@@ -21,7 +21,7 @@ export default function Home() {
                 rémunération
               </strong>
             </h1>
-            <p className="text-secondary mb-8 md:mb-12 text-xl">
+            <p className="text-secondary mb-8 md:mb-12">
               Contrairement à une micro-entreprise, une société permet
               d'optimiser ta rémunération qui peut conduire à une économie de
               cotisations et d'impôts.

@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 
 const Header = () => {
   return (
-    <header className="flex flex-col sm:flex-row items-center max-w-7xl m-auto py-6 px-4">
+    <header className="flex flex-col sm:flex-row items-center max-w-7xl m-auto py-4 px-4">
       <NextLink
         href="/"
         className="inline-flex gap-2 items-center sm:pr-4 mb-2 sm:mb-0"

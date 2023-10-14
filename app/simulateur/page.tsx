@@ -17,7 +17,7 @@ type StepId = "nature" | "ca" | "rémunération" | "résultat";
 const steps = {
   nature: ({ goToStep }) => (
     <>
-      <h2 className="text-3xl font-bold mb-2">Qu'est-ce que tu vends ?</h2>
+      <h2 className="text-3xl font-medium mb-2">Qu'est-ce que tu vends ?</h2>
       <p className="text-secondary mb-9">
         En micro-entreprise tu paies plus ou moins de cotisations selon le type
         de ton activité.
@@ -35,7 +35,7 @@ const steps = {
   ),
   ca: ({ goToStep, state, patchState }) => (
     <>
-      <h2 className="text-3xl font-bold mb-2">
+      <h2 className="text-3xl font-medium mb-2">
         Quel chiffre d'affaires tu prévois de réaliser cette année ?
       </h2>
       <p className="text-secondary mb-9">
@@ -67,7 +67,7 @@ const steps = {
   ),
   rémunération: ({ goToStep, state, patchState }) => (
     <>
-      <h2 className="text-3xl font-bold mb-2">
+      <h2 className="text-3xl font-medium mb-2">
         De quel montant net tu as besoin pour vivre par mois ?
       </h2>
       <p className="text-secondary mb-9">
@@ -130,31 +130,28 @@ const steps = {
     const différence = eurl.revenu + eurl.trésorerie - microEntreprise.revenu;
 
     return (
-      <div className="flex gap-20">
-        <div>
-          <h2 className="text-xl mb-4">Changement de statut</h2>
-          {différence > 0 ? (
-            <div className="flex items-center gap-2">
-              <span className="rounded-full bg-positive-light text-positive-dark inline-flex p-3">
-                <TrendingUp size={16} />
-              </span>{" "}
-              +{différence}€/an en EURL
-            </div>
-          ) : (
-            <div className="flex items-center gap-2">
-              <span className="rounded-full bg-negative-light text-negative-dark inline-flex p-3">
-                <TrendingDown size={16} />
-              </span>{" "}
-              -{différence}€/an en EURL
-            </div>
-          )}
-          <Button onClick={() => goToStep("nature")} className="mt-20">
-            Relance le simulateur
-          </Button>
-        </div>
-        <div className="flex-1">
-          <div>
-            <h2>En micro-entreprise</h2>
+      <>
+        <h2 className="text-3xl font-medium mb-2">
+          Tu peux faire des économies
+        </h2>
+        {différence > 0 ? (
+          <div className="flex items-center gap-2">
+            <span className="rounded-full bg-positive-light text-positive-dark inline-flex p-3">
+              <TrendingUp size={16} />
+            </span>{" "}
+            +{différence}€/an en EURL
+          </div>
+        ) : (
+          <div className="flex items-center gap-2">
+            <span className="rounded-full bg-negative-light text-negative-dark inline-flex p-3">
+              <TrendingDown size={16} />
+            </span>{" "}
+            -{différence}€/an en EURL
+          </div>
+        )}
+        <div className="flex gap-4 mt-8">
+          <div className="flex-1">
+            <h2 className="text-xl mb-8">En micro-entreprise</h2>
             <div className="flex justify-center">
               <Graph
                 greens={[
@@ -175,8 +172,8 @@ const steps = {
               />
             </div>
           </div>
-          <div>
-            <h2>En EURL</h2>
+          <div className="flex-1">
+            <h2 className="text-xl mb-8">En EURL</h2>
             <div className="flex justify-center">
               <Graph
                 greens={[
@@ -210,7 +207,12 @@ const steps = {
             </div>
           </div>
         </div>
-      </div>
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-20">
+          <Button onClick={() => goToStep("nature")}>
+            Relance le simulateur
+          </Button>
+        </div>
+      </>
     );
   },
 } satisfies Record<
@@ -271,7 +273,7 @@ export default function Simulateur() {
           (_, index) => index < currentQuestion
         )}
       />
-      <main className="max-w-7xl m-auto py-36 px-4">
+      <main className="max-w-7xl m-auto py-28 px-4">
         <p className="text-secondary text-sm mb-4">
           {currentQuestion <= totalQuestions ? (
             <>
