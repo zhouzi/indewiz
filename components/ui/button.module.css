@@ -1,0 +1,35 @@
+.buttonPrimary {
+  background: linear-gradient(93deg, #095594 0%, #07467a 46.87%, #063861 100%);
+  box-shadow: 8px 8px 8px 0px rgba(109, 183, 242, 0.3) inset,
+    -8px -8px 8px 0px rgba(1, 6, 10, 0.2) inset,
+    2px 0 0 0 rgba(32, 52, 69, 0.5) inset;
+}
+.buttonPrimary:hover {
+  background: linear-gradient(93deg, #095594 0%, #07467a 46.87%, #063861 100%);
+  box-shadow: -8px -8px 8px 0px rgba(48, 156, 242, 0.3) inset,
+    8px 8px 8px 0px rgba(1, 6, 10, 0.2) inset,
+    2px 0 0 0 rgba(32, 52, 69, 0.5) inset;
+}
+
+.buttonSecondary {
+  background: linear-gradient(
+    93deg,
+    #dceaf5 0.31%,
+    #c4dff5 47.81%,
+    #abd4f5 98.82%
+  );
+  box-shadow: 8px 8px 12px 0px rgba(245, 248, 250, 0.9) inset,
+    -8px -8px 12px 0px rgba(116, 145, 168, 0.3) inset,
+    2px 0 0 0 rgba(138, 189, 229, 0.5) inset;
+}
+.buttonSecondary:hover {
+  background: linear-gradient(
+    93deg,
+    #dceaf5 0.3%,
+    #c4dff5 47.81%,
+    #abd4f5 98.82%
+  );
+  box-shadow: -8px -8px 12px 0px rgba(245, 248, 250, 0.9) inset,
+    8px 8px 12px 0px rgba(116, 145, 168, 0.3) inset,
+    2px 0 0 0 rgba(138, 189, 229, 0.5) inset;
+}
