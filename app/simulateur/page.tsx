@@ -11,6 +11,7 @@ import { calculerME } from "@/lib/calculerME";
 import { produce } from "immer";
 import { TrendingDown, TrendingUp } from "lucide-react";
 import { FunctionComponent, useEffect, useReducer, useState } from "react";
+import styles from "./simulateur.module.css";
 
 type StepId = "nature" | "ca" | "rémunération" | "résultat";
 
@@ -268,6 +269,7 @@ export default function Simulateur() {
 
   return (
     <>
+      <div className={styles.shadow} />
       <Stepper
         progress={Array.from({ length: stepsList.length - 1 }).map(
           (_, index) => index < currentQuestion

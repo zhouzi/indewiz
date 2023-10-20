@@ -1,0 +1,15 @@
+.shadow {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  width: 140%;
+  height: 60%;
+  transform: translate(30%, -30%);
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(143, 205, 255, 0.2) 0%,
+    rgba(143, 205, 255, 0) 100%
+  );
+  pointer-events: none;
+}
