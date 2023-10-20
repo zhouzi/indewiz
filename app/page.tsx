@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <Stepper progress={[false]} />
       <main className="flex flex-col md:flex-row max-w-7xl m-auto py-28 px-4">
-        <div className="flex-1 flex flex-col justify-center md:pr-8">
+        <div className="flex flex-col justify-center md:pr-8 w-2/3">
           <div className="max-w-2xl">
             <h1 className="font-medium text-4xl mb-4">
               Paie moins d'impôts et de cotisations en optimisant ta{" "}
@@ -34,7 +34,7 @@ export default function Home() {
         <div
           className={cn(
             styles.heroPictureContainer,
-            "relative self-center mt-8 md:mt-0"
+            "relative w-1/3 flex justify-center"
           )}
           style={{ maxWidth: "70%" }}
         >
@@ -46,7 +46,7 @@ export default function Home() {
             style={{
               top: "8%",
               right: 0,
-              transform: "translateX(30%)",
+              transform: "translateX(26%)",
             }}
           >
             <span className="bg-negative-light text-negative-dark inline-flex p-2 rounded-full mr-1 align-middle">
@@ -112,7 +112,7 @@ export default function Home() {
               en EURL
             </small>
           </span>
-          <img src="/home-picture.png" alt="" width={369} height="auto" />
+          <img src="/home-picture.png" alt="" width="100%" height="auto" />
         </div>
       </main>
     </>

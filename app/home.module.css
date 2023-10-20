@@ -9,6 +9,7 @@
   );
   box-shadow: -4px 4px 12px 0px rgba(2, 22, 38, 0.11);
   backdrop-filter: blur(5px);
+  white-space: nowrap;
 }
 
 .heroPictureContainer {
