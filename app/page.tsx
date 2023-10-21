@@ -27,7 +27,7 @@ export default function Home() {
               cotisations et d'impôts.
             </p>
             <Button asChild>
-              <Link href="/simulateur">Lance le simulateur</Link>
+              <Link href="/simulateur">Lance la simulation</Link>
             </Button>
           </div>
         </div>
