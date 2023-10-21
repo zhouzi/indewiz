@@ -1,0 +1,22 @@
+.formOption {
+  background: linear-gradient(
+    274deg,
+    #dde9f5 0%,
+    rgba(221, 233, 245, 0.5) 52.6%,
+    rgba(221, 233, 245, 0) 100%
+  );
+  box-shadow: 2px 2px 2px 0px #ebf0f5 inset,
+    -2px -2px 2px 0px rgba(71, 87, 102, 0.25) inset;
+}
+
+.formOptionSelected {
+  background: linear-gradient(93deg, #147acc 0%, #126bb2 47.19%, #0f5c99 100%);
+  box-shadow: 2px 2px 1px 0px #095796 inset,
+    -2px -2px 1px 0px rgba(98, 179, 245, 0.5) inset;
+}
+
+.formOptionDisabled {
+  background: #e6ebf0;
+  box-shadow: 2px 2px 2px 0px #ebf0f5 inset,
+    -2px -2px 2px 0px rgba(71, 87, 102, 0.25) inset;
+}

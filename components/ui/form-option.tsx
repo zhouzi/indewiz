@@ -3,26 +3,27 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
+import styles from "./form-option.module.css";
 
-const formOptionVariants = cva(
-  "py-4 px-8 border border-transparent rounded-full text-xl",
-  {
-    variants: {
-      variant: {
-        primary: "border-secondary-lightest",
-        selected: "bg-primary text-white",
-      },
-      disabled: {
-        true: "opacity-50 pointer-events-none",
-        false: "",
-      },
+const formOptionVariants = cva("py-3 px-12 rounded-full cursor-pointer", {
+  variants: {
+    variant: {
+      primary: cn("", styles.formOption),
+      selected: cn("text-white font-bold", styles.formOptionSelected),
     },
-    defaultVariants: {
-      variant: "primary",
-      disabled: false,
+    disabled: {
+      true: cn(
+        "text-secondary-lighter pointer-events-none",
+        styles.formOptionDisabled
+      ),
+      false: "",
     },
-  }
-);
+  },
+  defaultVariants: {
+    variant: "primary",
+    disabled: false,
+  },
+});
 
 export interface FormOptionProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "disabled">,

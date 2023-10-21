@@ -11,13 +11,10 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: cn(
-          "bg-gradient-to-t from-primary-dark to-primary text-white border-primary-dark",
+          "bg-gradient-to-t from-primary-dark to-primary text-white",
           styles.buttonPrimary
         ),
-        secondary: cn(
-          "border-primary-dark text-primary-dark",
-          styles.buttonSecondary
-        ),
+        secondary: cn("text-primary-dark", styles.buttonSecondary),
       },
     },
     defaultVariants: {

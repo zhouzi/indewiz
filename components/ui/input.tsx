@@ -15,7 +15,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <input
           type={type}
           className={cn(
-            "py-4 px-8 bg-transparent rounded-full outline-none min-w-0",
+            "py-3 px-12 bg-transparent rounded-full outline-none min-w-0",
             styles.input,
             className
           )}

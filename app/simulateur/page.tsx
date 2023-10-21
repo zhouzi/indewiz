@@ -3,15 +3,23 @@
 
 import { Button } from "@/components/ui/button";
 import { FormOption } from "@/components/ui/form-option";
-import { Graph } from "@/components/ui/graph";
 import { NumberInput } from "@/components/ui/number-input";
 import { Stepper } from "@/components/ui/stepper";
 import { calculerEURL } from "@/lib/calculerEURL";
 import { calculerME } from "@/lib/calculerME";
 import { produce } from "immer";
-import { TrendingDown, TrendingUp } from "lucide-react";
 import { FunctionComponent, useEffect, useReducer, useState } from "react";
+import { Collapsible } from "@/components/ui/collapsible";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import styles from "./simulateur.module.css";
+import { TrendingUp } from "lucide-react";
 
 type StepId = "nature" | "ca" | "rémunération" | "résultat";
 
@@ -128,91 +136,162 @@ const steps = {
       return () => clearTimeout(timeoutId);
     }, [state.ca, state.rémunération]);
 
-    const différence = eurl.revenu + eurl.trésorerie - microEntreprise.revenu;
-
     return (
       <>
-        <h2 className="text-3xl font-medium mb-2">
-          Tu peux faire des économies
-        </h2>
-        {différence > 0 ? (
-          <div className="flex items-center gap-2">
-            <span className="rounded-full bg-positive-light text-positive-dark inline-flex p-3">
-              <TrendingUp size={16} />
-            </span>{" "}
-            +{différence}€/an en EURL
-          </div>
-        ) : (
-          <div className="flex items-center gap-2">
-            <span className="rounded-full bg-negative-light text-negative-dark inline-flex p-3">
-              <TrendingDown size={16} />
-            </span>{" "}
-            -{différence}€/an en EURL
-          </div>
-        )}
-        <div className="flex gap-4 mt-8">
-          <div className="flex-1">
-            <h2 className="text-xl mb-8">En micro-entreprise</h2>
-            <div className="flex justify-center">
-              <Graph
-                greens={[
-                  {
-                    label: "Revenu",
-                    value: microEntreprise.revenu,
-                    color: "#63CC3D",
-                  },
-                ]}
-                reds={[
-                  {
-                    label: "Cotisations",
-                    value: microEntreprise.cotisations,
-                    color: "#99312E",
-                  },
-                  { label: "IR", value: microEntreprise.ir, color: "#E5605C" },
-                ]}
-              />
-            </div>
-          </div>
-          <div className="flex-1">
-            <h2 className="text-xl mb-8">En EURL</h2>
-            <div className="flex justify-center">
-              <Graph
-                greens={[
-                  { label: "Revenu", value: eurl.revenu, color: "#63CC3D" },
-                  {
-                    label: "Trésorerie",
-                    value: Math.max(0, eurl.trésorerie),
-                    color: "#4A992E",
-                  },
-                ]}
-                reds={[
-                  {
-                    label: "Cotisations",
-                    value: eurl.cotisations,
-                    color: "#99312E",
-                  },
-                  { label: "IR", value: eurl.ir, color: "#E5605C" },
-                  { label: "IS", value: eurl.is, color: "#F72019" },
-                ].concat(
-                  eurl.trésorerie < 0
-                    ? [
-                        {
-                          label: "Déficit",
-                          value: Math.abs(eurl.trésorerie),
-                          color: "#FF0000",
-                        },
-                      ]
-                    : []
-                )}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-20">
+        <div className="flex items-center gap-2 mb-2">
+          <h2 className="text-3xl font-medium flex-1">Résultats</h2>
           <Button onClick={() => goToStep("nature")}>
-            Relance le simulateur
+            Relance la simulation
           </Button>
         </div>
+        <p className="mb-12 text-secondary">
+          En te versant une rémunération net de {state.rémunération} €/mois.
+        </p>
+        <Collapsible
+          className="mb-12"
+          trigger={
+            <>
+              <span className="flex-1">
+                <span className="text-lg font-medium">Micro-entreprise</span>{" "}
+                <span className="text-secondary text-sm">
+                  (situation actuelle)
+                </span>
+              </span>
+              <span className="text-lg font-medium">
+                {microEntreprise.revenu} €/an
+              </span>
+            </>
+          }
+          content={
+            <>
+              <Table className="mb-12">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-full">Entrées</TableHead>
+                    <TableHead className="text-right">
+                      {microEntreprise.revenu} €/an
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Revenu</TableCell>
+                    <TableCell className="text-right">
+                      {microEntreprise.revenu} €/an
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-full">Sorties</TableHead>
+                    <TableHead className="text-right">
+                      {microEntreprise.cotisations + microEntreprise.ir} €/an
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Cotisations</TableCell>
+                    <TableCell className="text-right">
+                      {microEntreprise.cotisations} €/an
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Impôt sur le revenu</TableCell>
+                    <TableCell className="text-right">
+                      {microEntreprise.ir} €/an
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </>
+          }
+        />
+        <Collapsible
+          trigger={
+            <>
+              <span className="flex-1">
+                <span className="text-lg font-medium">EURL</span>
+              </span>
+              <span className="flex items-center gap-2">
+                <span className="text-lg font-medium">
+                  {eurl.revenu + eurl.trésorerie} €/an
+                </span>
+                <span className="inline-flex">
+                  <span className="bg-positive-light rounded-full p-1">
+                    <TrendingUp size={16} />
+                  </span>
+                  <span className="text-secondary ml-1">
+                    +
+                    {Math.round(
+                      ((eurl.revenu + eurl.trésorerie) /
+                        microEntreprise.revenu -
+                        1) *
+                        100
+                    )}
+                    %
+                  </span>
+                </span>
+              </span>
+            </>
+          }
+          content={
+            <>
+              <Table className="mb-12">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-full">Entrées</TableHead>
+                    <TableHead className="text-right">
+                      {eurl.revenu + eurl.trésorerie} €/an
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Revenu</TableCell>
+                    <TableCell className="text-right">
+                      {eurl.revenu} €/an
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Trésorerie</TableCell>
+                    <TableCell className="text-right">
+                      {eurl.trésorerie} €/an
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-full">Sorties</TableHead>
+                    <TableHead className="text-right">
+                      {eurl.cotisations + eurl.ir + eurl.is} €/an
+                    </TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Cotisations</TableCell>
+                    <TableCell className="text-right">
+                      {eurl.cotisations} €/an
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Impôt sur le revenu</TableCell>
+                    <TableCell className="text-right">{eurl.ir} €/an</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Impôt sur les sociétés</TableCell>
+                    <TableCell className="text-right">{eurl.is} €/an</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </>
+          }
+        />
       </>
     );
   },
@@ -282,7 +361,7 @@ export default function Simulateur() {
               Question {currentQuestion}/{totalQuestions}
             </>
           ) : (
-            <>Résultat</>
+            <>&nbsp;</>
           )}
         </p>
         <Step
