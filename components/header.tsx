@@ -5,13 +5,25 @@ import { Button } from "./ui/button";
 const Header = () => {
   return (
     <header className="flex max-w-7xl px-4 m-auto items-center py-5">
-      <NextLink href="/" className="flex flex-1 gap-2">
-        <Logo />
-        <span className="px-2 py-1 leading-none bg-secondary-lightest text-primary-dark uppercase text-xs rounded-sm">
+      <NextLink href="/" className="flex flex-1 gap-2 items-end">
+        <img src="/logo.png" alt="" />
+        <span className="px-[8px] py-[2px] leading-tight bg-secondary-lightest text-primary-dark uppercase text-xs rounded-sm">
           beta
         </span>
       </NextLink>
-      <Button variant="secondary">Contacte-nous</Button>
+      <div className="flex gap-2 items-center">
+        <Button variant="ghost" asChild>
+          <NextLink href="/a-propos">À propos</NextLink>
+        </Button>
+        <Button variant="secondary" asChild>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSee1ebfvyT2z7IiFFxdYujP3nyieMmoha61bwALN8Ac_afUHg/viewform"
+            target="_blank"
+          >
+            Contacte-nous
+          </a>
+        </Button>
+      </div>
     </header>
   );
 };

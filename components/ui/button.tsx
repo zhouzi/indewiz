@@ -15,6 +15,7 @@ const buttonVariants = cva(
           styles.buttonPrimary
         ),
         secondary: cn("text-primary-dark", styles.buttonSecondary),
+        ghost: cn("py-2 px-6", styles.buttonGhost),
       },
     },
     defaultVariants: {
