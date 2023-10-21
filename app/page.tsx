@@ -12,8 +12,8 @@ export default function Home() {
   return (
     <>
       <Stepper progress={[false]} />
-      <main className="flex flex-col md:flex-row max-w-7xl m-auto py-28 px-4">
-        <div className="flex flex-col justify-center md:pr-8 w-2/3">
+      <main className="flex flex-col lg:flex-row max-w-7xl m-auto py-12 md:py-28 px-4 gap-12 lg:gap-0">
+        <div className="flex flex-col justify-center lg:w-2/3">
           <div className="max-w-2xl">
             <h1 className="font-medium text-4xl mb-4">
               Paie moins d'impôts et de cotisations en optimisant ta{" "}
@@ -34,9 +34,8 @@ export default function Home() {
         <div
           className={cn(
             styles.heroPictureContainer,
-            "relative w-1/3 flex justify-center"
+            "relative lg:w-1/3 flex justify-center max-w-[70%] self-center"
           )}
-          style={{ maxWidth: "70%" }}
         >
           <span
             className={cn(

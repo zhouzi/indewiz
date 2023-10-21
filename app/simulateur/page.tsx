@@ -157,7 +157,7 @@ const steps = {
             <>
               <span className="flex-1">
                 <span className="text-lg font-medium">Micro-entreprise</span>{" "}
-                <span className="text-secondary text-sm">
+                <span className="text-secondary text-sm block md:inline">
                   (situation actuelle)
                 </span>
               </span>
