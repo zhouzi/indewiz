@@ -35,7 +35,7 @@ const steps = {
         <FormOption variant="selected">Des services</FormOption>
         <FormOption disabled>Des marchandises (bientôt)</FormOption>
       </div>
-      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-20">
+      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-20 items-center">
         <Button className="w-full sm:w-auto" onClick={() => goToStep("ca")}>
           Suivant
         </Button>
@@ -57,11 +57,11 @@ const steps = {
         placeholder="0"
         afterIcon="€/an"
       />
-      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-20">
+      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-20 items-center">
         <Button
           className="w-full sm:w-auto"
           onClick={() => goToStep("nature")}
-          variant="secondary"
+          variant="ghost"
         >
           Précédent
         </Button>
@@ -89,11 +89,11 @@ const steps = {
         placeholder="0"
         afterIcon="€/mois"
       />
-      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-20">
+      <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-20 items-center">
         <Button
           className="w-full sm:w-auto"
           onClick={() => goToStep("ca")}
-          variant="secondary"
+          variant="ghost"
         >
           Précédent
         </Button>
