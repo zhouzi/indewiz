@@ -19,7 +19,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import styles from "./simulateur.module.css";
-import { TrendingUp } from "lucide-react";
+import { TrendingDown, TrendingUp } from "lucide-react";
 
 type StepId = "nature" | "ca" | "rémunération" | "résultat";
 
@@ -136,6 +136,10 @@ const steps = {
       return () => clearTimeout(timeoutId);
     }, [state.ca, state.rémunération]);
 
+    const eurlDifférence = Math.round(
+      ((eurl.revenu + eurl.trésorerie) / microEntreprise.revenu - 1) * 100
+    );
+
     return (
       <>
         <div className="flex items-center gap-2 mb-2">
@@ -220,19 +224,25 @@ const steps = {
                   {eurl.revenu + eurl.trésorerie} €/an
                 </span>
                 <span className="inline-flex">
-                  <span className="bg-positive-light rounded-full p-1">
-                    <TrendingUp size={16} />
-                  </span>
-                  <span className="text-secondary ml-1">
-                    +
-                    {Math.round(
-                      ((eurl.revenu + eurl.trésorerie) /
-                        microEntreprise.revenu -
-                        1) *
-                        100
-                    )}
-                    %
-                  </span>
+                  {eurlDifférence >= 0 ? (
+                    <>
+                      <span className="bg-positive-light text-positive-dark rounded-full p-1">
+                        <TrendingUp size={16} />
+                      </span>
+                      <span className="text-secondary ml-1">
+                        +{eurlDifférence}%
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="bg-negative-light text-negative-dark rounded-full p-1">
+                        <TrendingDown size={16} />
+                      </span>
+                      <span className="text-secondary ml-1">
+                        {eurlDifférence}%
+                      </span>
+                    </>
+                  )}
                 </span>
               </span>
             </>
