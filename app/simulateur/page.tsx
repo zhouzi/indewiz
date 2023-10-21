@@ -152,7 +152,7 @@ const steps = {
           En te versant une rémunération net de {state.rémunération} €/mois.
         </p>
         <Collapsible
-          className="mb-12"
+          className="mb-6"
           trigger={
             <>
               <span className="flex-1">
