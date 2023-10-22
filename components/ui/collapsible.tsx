@@ -28,7 +28,7 @@ const Collapsible = ({ trigger, content, ...props }: CollapsibleProps) => {
           {open ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
         </span>
       </CollapsiblePrimitive.Trigger>
-      <CollapsiblePrimitive.Content className={cn("py-3 pl-11 pr-12")}>
+      <CollapsiblePrimitive.Content className={cn("py-3 pl-11 pr-[126px]")}>
         {content}
       </CollapsiblePrimitive.Content>
     </CollapsiblePrimitive.Root>

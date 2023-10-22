@@ -198,12 +198,12 @@ const steps = {
               <span className="text-lg font-medium ml-1">
                 {microEntreprise.revenu} €/an
               </span>
-              <span className="w-[80px] ml-2"></span>
+              <span className="w-[60px] ml-2"></span>
             </>
           }
           content={
             <>
-              <Table className="mb-12">
+              <Table className="mb-10">
                 <TableHeader>
                   <TableRow>
                     <TableHead className="w-full">Entrées</TableHead>
@@ -259,7 +259,7 @@ const steps = {
                 <span className="text-lg font-medium">
                   {eurl.revenu + eurl.trésorerie} €/an
                 </span>
-                <span className="inline-flex w-[80px]">
+                <span className="inline-flex w-[60px]">
                   {eurlDifférence >= 0 ? (
                     <>
                       <span className="bg-positive-light text-positive-dark rounded-full p-1">
@@ -285,7 +285,7 @@ const steps = {
           }
           content={
             <>
-              <Table className="mb-12">
+              <Table className="mb-10">
                 <TableHeader>
                   <TableRow>
                     <TableHead className="w-full">Entrées</TableHead>
