@@ -194,9 +194,11 @@ const steps = {
                   (situation actuelle)
                 </span>
               </span>
-              <span className="text-lg font-medium">
+              <span className="text-secondary">Gain annuel</span>
+              <span className="text-lg font-medium ml-1">
                 {microEntreprise.revenu} €/an
               </span>
+              <span className="w-[80px] ml-2"></span>
             </>
           }
           content={
@@ -252,11 +254,12 @@ const steps = {
               <span className="flex-1">
                 <span className="text-lg font-medium">EURL</span>
               </span>
-              <span className="flex items-center gap-2">
+              <span className="text-secondary">Gain annuel</span>
+              <span className="flex items-center gap-2 ml-1">
                 <span className="text-lg font-medium">
                   {eurl.revenu + eurl.trésorerie} €/an
                 </span>
-                <span className="inline-flex">
+                <span className="inline-flex w-[80px]">
                   {eurlDifférence >= 0 ? (
                     <>
                       <span className="bg-positive-light text-positive-dark rounded-full p-1">
