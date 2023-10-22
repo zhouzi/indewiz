@@ -8,7 +8,13 @@ import { Stepper } from "@/components/ui/stepper";
 import { calculerEURL } from "@/lib/calculerEURL";
 import { calculerME } from "@/lib/calculerME";
 import { produce } from "immer";
-import { FunctionComponent, useEffect, useReducer, useState } from "react";
+import {
+  FunctionComponent,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
 import { Collapsible } from "@/components/ui/collapsible";
 import {
   Table,
@@ -19,7 +25,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import styles from "./simulateur.module.css";
-import { TrendingDown, TrendingUp } from "lucide-react";
+import { Pen, TrendingDown, TrendingUp } from "lucide-react";
 
 type StepId = "nature" | "ca" | "rémunération" | "résultat";
 
@@ -140,6 +146,8 @@ const steps = {
       ((eurl.revenu + eurl.trésorerie) / microEntreprise.revenu - 1) * 100
     );
 
+    const inputRef = useRef<HTMLInputElement>(null);
+
     return (
       <>
         <div className="flex items-center gap-2 mb-2">
@@ -149,7 +157,32 @@ const steps = {
           </Button>
         </div>
         <p className="mb-12 text-secondary">
-          En te versant une rémunération net de {state.rémunération} €/mois.
+          En te versant une rémunération net de{" "}
+          <span
+            className="inline-flex items-center gap-1 cursor-pointer"
+            onClick={() => inputRef.current?.select()}
+          >
+            <span className="text-text border-b-[1px] border-b-text leading-tight">
+              <input
+                ref={inputRef}
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                onChange={(event) => {
+                  const value = Number(event.currentTarget.value);
+                  if (isNaN(value)) return;
+
+                  patchState({ rémunération: Number(event.target.value) });
+                }}
+                onClick={(event) => event.stopPropagation()}
+                value={state.rémunération}
+                className="inline bg-transparent focus:outline-none"
+                style={{ width: `${String(state.rémunération).length}ch` }}
+              />
+              €/mois
+            </span>
+            <Pen size={16} />
+          </span>
         </p>
         <Collapsible
           className="mb-6"
