@@ -1,16 +1,16 @@
 import NextLink from "next/link";
 import { Button } from "./ui/button";
+import { MobileMenu } from "./mobileMenu";
+import { HeaderLogo } from "./headerLogo";
 
 const Header = () => {
   return (
-    <header className="flex flex-col md:flex-row gap-4 max-w-7xl px-4 m-auto items-center py-5">
-      <NextLink href="/" className="flex flex-1 gap-2 items-end">
-        <img src="/logo.png" alt="" />
-        <span className="px-[8px] py-[2px] leading-tight bg-secondary-lightest text-primary-dark uppercase text-xs rounded-sm">
-          beta
-        </span>
-      </NextLink>
-      <div className="flex gap-2 items-center">
+    <header className="flex flex-row gap-4 max-w-7xl px-4 m-auto items-center justify-between py-5">
+      <HeaderLogo />
+      <div className="flex items-center md:hidden">
+        <MobileMenu />
+      </div>
+      <div className="gap-2 items-center hidden md:flex">
         <Button variant="ghost" asChild>
           <NextLink href="/a-propos">À propos</NextLink>
         </Button>
