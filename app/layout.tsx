@@ -31,7 +31,9 @@ export default function RootLayout({
       <Head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </Head>
-      <body className={cn(dmSans.className, "text-text")}>
+      <body
+        className={cn(dmSans.className, "text-text w-full overflow-x-hidden")}
+      >
         <Header />
         {children}
         <Analytics />
