@@ -15,18 +15,18 @@ export default function Home() {
       <main className="flex flex-col lg:flex-row max-w-7xl m-auto py-12 md:py-28 px-4 gap-12 lg:gap-0">
         <div className="flex flex-col justify-center lg:w-2/3">
           <div className="max-w-2xl">
-            <h1 className="font-medium text-4xl mb-4">
+            <h1 className="font-medium text-4xl mb-4 text-center md:text-left">
               Paie moins d'impôts et de cotisations en optimisant ta{" "}
               <strong className="bg-gradient-to-t from-primary-dark to-primary bg-clip-text text-transparent">
                 rémunération
               </strong>
             </h1>
-            <p className="text-secondary mb-8 md:mb-12">
+            <p className="text-secondary mb-8 md:mb-12 text-center md:text-left">
               Contrairement à une micro-entreprise, une société permet
               d'optimiser ta rémunération qui peut conduire à une économie de
               cotisations et d'impôts.
             </p>
-            <Button asChild>
+            <Button className="w-full md:w-auto" asChild>
               <Link href="/simulateur">Lance la simulation</Link>
             </Button>
           </div>
