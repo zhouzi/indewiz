@@ -194,7 +194,7 @@ const steps = {
                   (situation actuelle)
                 </span>
               </span>
-              <span className="text-secondary">Gain annuel</span>
+              <span className="text-secondary">Résultat</span>
               <span className="text-lg font-medium ml-1">
                 {microEntreprise.revenu} €/an
               </span>
@@ -254,7 +254,7 @@ const steps = {
               <span className="flex-1">
                 <span className="text-lg font-medium">EURL</span>
               </span>
-              <span className="text-secondary">Gain annuel</span>
+              <span className="text-secondary">Résultat</span>
               <span className="flex items-center gap-2 ml-1">
                 <span className="text-lg font-medium">
                   {eurl.revenu + eurl.trésorerie} €/an
