@@ -1,3 +1,18 @@
+.variantDefault {
+  background: linear-gradient(90deg, #095594 0%, #07467a 50%, #063861 100%);
+  box-shadow:
+    8px 8px 8px 0px rgba(109, 183, 242, 0.3) inset,
+    -8px -8px 8px 0px rgba(1, 6, 10, 0.2) inset,
+    inset 0 0 0 2px rgba(32, 52, 69, 0.5);
+}
+.variantDefault:hover {
+  background: linear-gradient(90deg, #095594 0%, #07467a 50%, #063861 100%);
+  box-shadow:
+    -8px -8px 8px 0px rgba(48, 156, 242, 0.3) inset,
+    8px 8px 8px 0px rgba(1, 6, 10, 0.2) inset,
+    inset 0 0 0 2px rgba(32, 52, 69, 0.5);
+}
+
 .variantSecondary {
   background: linear-gradient(90deg, #dceaf5 0%, #c4dff5 50%, #abd4f5 100%);
   box-shadow:

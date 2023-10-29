@@ -11,7 +11,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "",
+        default: cn("text-white", styles.variantDefault),
         secondary: cn(styles.variantSecondary),
         ghost: cn(styles.variantGhost),
       },

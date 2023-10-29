@@ -10,12 +10,12 @@ const Header = () => {
         <img
           src="/logo.png"
           alt="Logo indéwiz"
-          className="h-[24px] w-auto hidden sm:inline-flex"
+          className="h-[24px] w-auto hidden md:inline-flex"
         />
         <img
           src="/logo-small.png"
           alt="Logo indéwiz"
-          className="h-[24px] w-auto inline-flex sm:hidden"
+          className="h-[24px] w-auto inline-flex md:hidden"
         />
         <span className="uppercase rounded text-xs bg-primary-50 px-2 py-1 leading-none text-primary-700">
           beta
@@ -23,15 +23,15 @@ const Header = () => {
       </Link>
       <nav>
         <ul className="flex gap-2">
-          <li className="sm:hidden">
+          <li className="md:hidden">
             <MobileMenu />
           </li>
-          <li className="hidden sm:inline-flex">
+          <li className="hidden md:inline-flex">
             <Button variant="ghost" asChild>
               <Link href="/a-propos">À propos</Link>
             </Button>
           </li>
-          <li className="hidden sm:inline-flex">
+          <li className="hidden md:inline-flex">
             <Button variant="secondary" asChild>
               <a
                 href="https://docs.google.com/forms/d/e/1FAIpQLSee1ebfvyT2z7IiFFxdYujP3nyieMmoha61bwALN8Ac_afUHg/viewform"

@@ -1,7 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { Portal, Root, Trigger, Content } from "@radix-ui/react-dialog";
+import {
+  Portal,
+  Root,
+  Trigger,
+  Content,
+  Overlay,
+} from "@radix-ui/react-dialog";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
@@ -21,7 +27,8 @@ const MobileMenu = () => {
         </Button>
       </Trigger>
       <Portal container={document.querySelector("header")}>
-        <Content className="absolute top-full z-50 w-full">
+        <Overlay className="absolute top-full translate-y-[4px] w-full h-screen z-50 bg-white/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0" />
+        <Content className="absolute top-full translate-y-[4px] z-50 w-full bg-white">
           <nav>
             <ul className="flex flex-col gap-2 [&_li]:flex [&_li]:flex-col">
               <li>

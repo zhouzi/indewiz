@@ -24,6 +24,21 @@ const config: Config = {
           DEFAULT: "var(--secondary-50)",
           50: "var(--secondary-50)",
         },
+        text: {
+          DEFAULT: "var(--text-500)",
+          300: "var(--text-300)",
+          500: "var(--text-500)",
+        },
+        positive: {
+          DEFAULT: "var(--positive-500)",
+          50: "var(--positive-50)",
+          500: "var(--positive-500)",
+        },
+        negative: {
+          DEFAULT: "var(--negative-500)",
+          50: "var(--negative-50)",
+          500: "var(--negative-500)",
+        },
       },
     },
   },
