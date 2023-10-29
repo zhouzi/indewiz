@@ -20,6 +20,10 @@ const config: Config = {
           500: "var(--primary-500)",
           700: "var(--primary-700)",
         },
+        secondary: {
+          DEFAULT: "var(--secondary-50)",
+          50: "var(--secondary-50)",
+        },
       },
     },
   },
