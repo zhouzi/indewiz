@@ -1,28 +1,49 @@
-import NextLink from "next/link";
-import { Button } from "./ui/button";
+import Link from "next/link";
+
 import { MobileMenu } from "./mobileMenu";
-import { HeaderLogo } from "./headerLogo";
+import { Button } from "./ui/button";
 
 const Header = () => {
   return (
-    <header className="flex flex-row gap-4 max-w-7xl px-4 m-auto items-center justify-between py-5">
-      <HeaderLogo />
-      <div className="flex items-center md:hidden">
-        <MobileMenu />
-      </div>
-      <div className="gap-2 items-center hidden md:flex">
-        <Button variant="ghost" asChild>
-          <NextLink href="/a-propos">À propos</NextLink>
-        </Button>
-        <Button variant="secondary" asChild>
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSee1ebfvyT2z7IiFFxdYujP3nyieMmoha61bwALN8Ac_afUHg/viewform"
-            target="_blank"
-          >
-            Contacte-nous
-          </a>
-        </Button>
-      </div>
+    <header className="flex items-center relative">
+      <Link href="/" className="inline-flex items-end gap-2 flex-1">
+        <img
+          src="/logo.png"
+          alt="Logo indéwiz"
+          className="h-[24px] w-auto hidden sm:inline-flex"
+        />
+        <img
+          src="/logo-small.png"
+          alt="Logo indéwiz"
+          className="h-[24px] w-auto inline-flex sm:hidden"
+        />
+        <span className="uppercase rounded text-xs bg-primary-50 px-2 py-1 leading-none text-primary-700">
+          beta
+        </span>
+      </Link>
+      <nav>
+        <ul className="flex gap-2">
+          <li className="sm:hidden">
+            <MobileMenu />
+          </li>
+          <li className="hidden sm:inline-flex">
+            <Button variant="ghost" asChild>
+              <Link href="/a-propos">À propos</Link>
+            </Button>
+          </li>
+          <li className="hidden sm:inline-flex">
+            <Button variant="secondary" asChild>
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSee1ebfvyT2z7IiFFxdYujP3nyieMmoha61bwALN8Ac_afUHg/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Contacte-nous
+              </a>
+            </Button>
+          </li>
+        </ul>
+      </nav>
     </header>
   );
 };

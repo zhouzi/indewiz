@@ -1,25 +1,20 @@
-import "./globals.css";
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
-import { Analytics } from "@vercel/analytics/react";
+import { DM_Sans as FontSans } from "next/font/google";
+
 import { Header } from "@/components/header";
 import { cn } from "@/lib/utils";
-import Head from "next/head";
 
-const dmSans = DM_Sans({ subsets: ["latin"] });
+import "./globals.css";
 
-const title = "IndeWIZ - Simulateurs pour indépendants";
-const description =
-  "IndeWIZ est une collection de simulateurs qui mettent en lumière les avantages et inconvénients des différents statuts juridiques. Plus qu'un comparatif, ils permettent une étude des différentes stratégies répondants à une variété de besoins.";
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
-export const metadata = {
-  title,
-  description,
-  openGraph: {
-    title,
-    description,
-  },
-} satisfies Metadata;
+export const metadata: Metadata = {
+  title: "indéwiz",
+  description: "",
+};
 
 export default function RootLayout({
   children,
@@ -28,15 +23,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <Head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </Head>
       <body
-        className={cn(dmSans.className, "text-text w-full overflow-x-hidden")}
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased flex flex-col max-w-full overflow-x-hidden",
+          fontSans.variable,
+        )}
       >
         <Header />
         {children}
-        <Analytics />
       </body>
     </html>
   );

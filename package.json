@@ -9,28 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@radix-ui/react-collapsible": "^1.0.3",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-slot": "^1.0.2",
-    "@types/node": "20.5.9",
-    "@types/react": "18.2.21",
-    "@types/react-dom": "18.2.7",
-    "@vercel/analytics": "^1.0.2",
-    "autoprefixer": "10.4.15",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
-    "eslint": "8.48.0",
-    "eslint-config-next": "13.4.19",
-    "immer": "^10.0.2",
-    "lucide-react": "^0.286.0",
-    "modele-social": "^1.7.2",
-    "next": "13.4.19",
-    "postcss": "8.4.29",
-    "publicodes": "^1.0.0-beta.71",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "tailwind-merge": "^1.14.0",
-    "tailwindcss": "3.3.3",
-    "typescript": "5.2.2"
+    "lucide-react": "^0.290.0",
+    "next": "14.0.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "tailwind-merge": "^2.0.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.0",
+    "postcss": "^8",
+    "prettier": "3.0.3",
+    "tailwindcss": "^3",
+    "typescript": "^5"
   }
 }

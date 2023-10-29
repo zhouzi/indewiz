@@ -1,31 +1,29 @@
-import type { Config } from "tailwindcss";
+import { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
   ],
   theme: {
+    container: {},
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+      },
       colors: {
-        "primary-lightest": "#DCEAF5",
-        "primary-lighter": "#ABD4F5",
-        primary: "#1789E5",
-        "primary-dark": "#095594",
-        text: "#021626",
-        background: "#F5F7FA",
-        secondary: "#475766",
-        "secondary-lighter": "#A1AAB2",
-        "secondary-lightest": "#CFDAE5",
-        "positive-light": "#E7FAE1",
-        "positive-dark": "#021626",
-        "negative-light": "#FAE1EA",
-        "negative-dark": "#6F213D",
+        primary: {
+          DEFAULT: "var(--primary-500)",
+          50: "var(--primary-50)",
+          500: "var(--primary-500)",
+          700: "var(--primary-700)",
+        },
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };
 
 export default config;

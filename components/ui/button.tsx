@@ -3,25 +3,23 @@ import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
+
 import styles from "./button.module.css";
 
 const buttonVariants = cva(
-  "rounded inline-flex justify-center py-3 px-12 font-medium",
+  "inline-flex px-12 py-4 rounded font-medium text-primary-700 justify-center",
   {
     variants: {
       variant: {
-        primary: cn(
-          "bg-gradient-to-t from-primary-dark to-primary text-white",
-          styles.buttonPrimary
-        ),
-        secondary: cn("text-primary-dark", styles.buttonSecondary),
-        ghost: cn("py-2 px-6", styles.buttonGhost),
+        default: "",
+        secondary: cn(styles.variantSecondary),
+        ghost: cn(styles.variantGhost),
       },
     },
     defaultVariants: {
-      variant: "primary",
+      variant: "default",
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -40,7 +38,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       />
     );
-  }
+  },
 );
 Button.displayName = "Button";
 
