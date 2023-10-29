@@ -6,7 +6,6 @@
   right: 0;
   width: 50%;
   height: 420px;
-  overflow: hidden;
 }
 .shadow::before {
   content: "";
