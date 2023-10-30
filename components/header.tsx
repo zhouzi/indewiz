@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 
 const Header = () => {
   return (
-    <header className="flex items-center relative">
+    <header className="flex items-center relative container py-4">
       <Link href="/" className="inline-flex items-end gap-2 flex-1">
         <img
           src="/logo.png"

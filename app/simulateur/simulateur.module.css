@@ -1,0 +1,7 @@
+.shadow {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(143, 205, 255, 0.2) 0%,
+    rgba(143, 205, 255, 0) 100%
+  );
+}

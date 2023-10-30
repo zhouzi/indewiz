@@ -33,7 +33,7 @@ export default function Home() {
   return (
     <>
       <Progress />
-      <main className="flex flex-col md:flex-row gap-14 md:gap-8 md:items-center">
+      <main className="flex flex-col md:flex-row gap-14 md:gap-8 md:items-center container">
         <div className="text-center md:text-left md:flex-1">
           <h1 className="text-4xl font-medium mb-6">
             Paie moins de cotisations et d'impôt en optimisant ta{" "}
@@ -42,8 +42,8 @@ export default function Home() {
             </strong>
           </h1>
           <p className="text-text-300 mb-12">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
-            quidem veniam distinctio exercitationem.
+            Contrairement à une micro-entreprise une société permet d'ajuster ta
+            rémunération et conduire à une économie de cotisations et d'impôts.
           </p>
           <Button className="w-full md:w-auto" asChild>
             <Link href="/simulateur">Lance le simulateur</Link>

@@ -1,0 +1,6 @@
+.trigger {
+  background: linear-gradient(95deg, #f7f9fa -1.62%, #fff 100%);
+  box-shadow:
+    -3px -3px 4px 0px rgba(12, 130, 228, 0.1) inset,
+    0 0 0 2px rgba(210, 232, 250, 0.2);
+}

@@ -8,7 +8,16 @@ const config: Config = {
     "./app/**/*.{ts,tsx}",
   ],
   theme: {
-    container: {},
+    container: {
+      center: true,
+      padding: "1rem",
+      screens: {
+        sm: "100%",
+        md: "100%",
+        lg: "1024px",
+        xl: "1280px",
+      },
+    },
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
@@ -23,6 +32,7 @@ const config: Config = {
         secondary: {
           DEFAULT: "var(--secondary-50)",
           50: "var(--secondary-50)",
+          300: "var(--secondary-300)",
         },
         text: {
           DEFAULT: "var(--text-500)",
