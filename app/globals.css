@@ -23,6 +23,7 @@
     position: relative;
     font-size: 14px;
     overflow-x: hidden;
+    height: 100%;
   }
   @media (min-width: 768px) {
     html {
