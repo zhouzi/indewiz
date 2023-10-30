@@ -37,9 +37,9 @@ export default function Home() {
         <div className="text-center md:text-left md:flex-1">
           <h1 className="text-4xl font-bold md:font-medium mb-6">
             Paie moins de cotisations et d'impôt en optimisant ta{" "}
-            <strong className="bg-gradient-to-t from-primary-700 to-primary-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-t from-primary-700 to-primary-500 bg-clip-text text-transparent">
               rémunération
-            </strong>
+            </span>
           </h1>
           <p className="text-text-300 mb-12">
             Contrairement à une micro-entreprise une société permet d'ajuster ta
