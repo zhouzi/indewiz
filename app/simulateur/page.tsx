@@ -256,14 +256,16 @@ const steps = {
                 <span className="flex flex-col text-xl font-medium md:flex-row md:gap-2">
                   <span className="md:flex-1">
                     Micro-entreprise{" "}
-                    <small className="text-sm font-normal text-text-300">
+                    <small className="hidden md:inline text-sm font-normal text-text-300">
                       (situation actuelle)
                     </small>
                   </span>
                   <span className="flex items-center gap-2">
-                    <span className="text-text-300 font-normal">Résultat</span>{" "}
+                    <span className="text-text-300 font-normal hidden md:inline">
+                      Résultat
+                    </span>{" "}
                     {me.revenu} €/an
-                    <span className="inline-flex items-center gap-1 w-[60px]" />
+                    <span className="inline-flex items-center gap-1 md:w-[60px]" />
                   </span>
                 </span>
               }
@@ -319,9 +321,11 @@ const steps = {
                 <span className="flex flex-col text-xl font-medium md:flex-row md:gap-2">
                   <span className="md:flex-1">EURL</span>
                   <span className="flex items-center gap-1">
-                    <span className="text-text-300 font-normal">Résultat</span>{" "}
+                    <span className="text-text-300 font-normal hidden md:inline">
+                      Résultat
+                    </span>{" "}
                     {eurl.revenu + eurl.trésorerie} €/an
-                    <span className="inline-flex items-center gap-1 w-[60px]">
+                    <span className="inline-flex items-center gap-1 md:w-[60px]">
                       {eurlDifférence >= 0 ? (
                         <>
                           <span className="bg-positive-50 text-positive-500 rounded-full p-1">

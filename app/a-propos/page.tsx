@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Progress />
-      <main className="container">
+      <main className="container pb-4">
         <div className="max-w-2xl lg:max-w-4xl">
           <h1 className="text-4xl font-medium mb-6">À propos</h1>
           <p className="text-text-300 mb-3">

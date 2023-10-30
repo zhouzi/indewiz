@@ -33,11 +33,11 @@ export default function Home() {
   return (
     <>
       <Progress />
-      <main className="flex flex-col md:flex-row gap-14 md:gap-8 md:items-center container">
+      <main className="flex flex-col md:flex-row gap-14 md:gap-8 md:items-center container pb-4">
         <div className="text-center md:text-left md:flex-1">
-          <h1 className="text-4xl font-medium mb-6">
+          <h1 className="text-4xl font-bold md:font-medium mb-6">
             Paie moins de cotisations et d'impôt en optimisant ta{" "}
-            <strong className="bg-gradient-to-t from-primary-700 to-primary-500 bg-clip-text text-transparent font-medium">
+            <strong className="bg-gradient-to-t from-primary-700 to-primary-500 bg-clip-text text-transparent">
               rémunération
             </strong>
           </h1>
@@ -54,7 +54,7 @@ export default function Home() {
         >
           <HeroNotice className="top-[10%] left-[66%] -z-10">EURL ?</HeroNotice>
           <HeroNotice className="top-[25%] left-[25%]">SASU ?</HeroNotice>
-          <HeroNotice className="top-[40%] left-[60%]">
+          <HeroNotice className="top-[42%] left-[58%]">
             <span className="p-1 bg-negative-50 text-negative-500 rounded-full inline-flex">
               <TrendingDown size={16} />
             </span>
@@ -64,7 +64,7 @@ export default function Home() {
             </span>
           </HeroNotice>
           <HeroNotice className="top-[60%] left-[30%]">EI ?</HeroNotice>
-          <HeroNotice className="top-[80%] left-[70%]">
+          <HeroNotice className="top-[80%] left-[64%]">
             <span className="p-1 bg-positive-50 text-positive-500 rounded-full inline-flex">
               <TrendingUp size={16} />
             </span>
