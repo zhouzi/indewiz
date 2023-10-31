@@ -264,14 +264,14 @@ const steps = {
             <Collapsible
               className="mb-2"
               trigger={
-                <span className="flex flex-col text-xl font-medium md:flex-row md:gap-2">
-                  <span className="md:flex-1">
+                <span className="flex flex-col md:flex-row md:gap-2">
+                  <span className="md:flex-1 md:text-xl md:font-medium">
                     Micro-entreprise{" "}
-                    <small className="hidden md:inline text-sm font-normal text-text-300">
+                    <small className="text-sm font-normal text-text-300">
                       (situation actuelle)
                     </small>
                   </span>
-                  <span className="flex items-center gap-2">
+                  <span className="flex items-center gap-1 text-xl font-medium">
                     <span className="text-text-300 font-normal hidden md:inline">
                       Résultat
                     </span>{" "}
@@ -329,9 +329,11 @@ const steps = {
             />
             <Collapsible
               trigger={
-                <span className="flex flex-col text-xl font-medium md:flex-row md:gap-2">
-                  <span className="md:flex-1">EURL</span>
-                  <span className="flex items-center gap-1">
+                <span className="flex flex-col md:flex-row md:gap-2">
+                  <span className="md:flex-1 md:text-xl md:font-medium">
+                    EURL
+                  </span>
+                  <span className="flex items-center gap-1 text-xl font-medium">
                     <span className="text-text-300 font-normal hidden md:inline">
                       Résultat
                     </span>{" "}
