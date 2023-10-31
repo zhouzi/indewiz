@@ -32,10 +32,10 @@ const HeroNotice = ({ className, children }: HeroNoticeProps) => {
 export default function Home() {
   return (
     <>
-      <Progress className="mb-0 md:mb-0" />
+      <Progress className="md:mb-12" />
       <main className="flex-1 flex flex-col md:flex-row gap-14 md:gap-8 md:items-center container pb-4">
         <div className="text-center md:text-left md:flex-1">
-          <h1 className="text-4xl font-bold md:font-medium mb-6">
+          <h1 className="text-3xl md:text-4xl font-bold md:font-medium mb-6">
             Paie moins de cotisations et d'impôts en optimisant ta{" "}
             <span className="bg-gradient-to-t from-primary-700 to-primary-500 bg-clip-text text-transparent">
               rémunération
@@ -50,7 +50,7 @@ export default function Home() {
           </Button>
         </div>
         <div
-          className={cn("relative m-auto px-12 md:max-w-[40%]", styles.hero)}
+          className={cn("relative m-auto px-12 md:max-w-[38%]", styles.hero)}
         >
           <HeroNotice className="top-[10%] left-[66%] -z-10">EURL ?</HeroNotice>
           <HeroNotice className="top-[25%] left-[25%]">SASU ?</HeroNotice>
