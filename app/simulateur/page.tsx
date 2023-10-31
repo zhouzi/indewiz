@@ -223,10 +223,22 @@ const steps = {
               </div>
             </div>
             <SimulateurDescription>
-              En te versant une rémunération net de{" "}
+              En te versant une rémunération net de
               <span
-                className="inline-flex items-center gap-1 cursor-pointer"
-                onClick={() => inputRef.current?.select()}
+                className="inline-flex items-center gap-1 cursor-pointer p-2"
+                onClick={(event) => {
+                  const input = inputRef.current;
+
+                  if (input == null) {
+                    return;
+                  }
+
+                  if (event.target === input) {
+                    return;
+                  }
+
+                  input.select();
+                }}
               >
                 <span className="text-text border-b-[1px] border-b-text leading-tight">
                   <input
@@ -240,7 +252,6 @@ const steps = {
 
                       patchState({ rémunération: Number(event.target.value) });
                     }}
-                    onClick={(event) => event.stopPropagation()}
                     value={state.rémunération}
                     className="inline bg-transparent focus:outline-none"
                     style={{ width: `${String(state.rémunération).length}ch` }}
