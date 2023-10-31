@@ -36,7 +36,7 @@ export default function Home() {
       <main className="flex flex-col md:flex-row gap-14 md:gap-8 md:items-center container pb-4">
         <div className="text-center md:text-left md:flex-1">
           <h1 className="text-4xl font-bold md:font-medium mb-6">
-            Paie moins de cotisations et d'impôt en optimisant ta{" "}
+            Paie moins de cotisations et d'impôts en optimisant ta{" "}
             <span className="bg-gradient-to-t from-primary-700 to-primary-500 bg-clip-text text-transparent">
               rémunération
             </span>
