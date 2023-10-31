@@ -32,8 +32,8 @@ const HeroNotice = ({ className, children }: HeroNoticeProps) => {
 export default function Home() {
   return (
     <>
-      <Progress />
-      <main className="flex flex-col md:flex-row gap-14 md:gap-8 md:items-center container pb-4">
+      <Progress className="mb-0 md:mb-0" />
+      <main className="flex-1 flex flex-col md:flex-row gap-14 md:gap-8 md:items-center container pb-4">
         <div className="text-center md:text-left md:flex-1">
           <h1 className="text-4xl font-bold md:font-medium mb-6">
             Paie moins de cotisations et d'impôts en optimisant ta{" "}
