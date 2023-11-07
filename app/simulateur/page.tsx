@@ -208,7 +208,7 @@ const steps = {
           }),
           stale: false,
         });
-      }, 250);
+      }, 500);
       return () => clearTimeout(timeoutId);
     }, [state.ca, state.rémunération]);
 
