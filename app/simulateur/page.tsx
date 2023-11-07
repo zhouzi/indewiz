@@ -24,6 +24,7 @@ import { calculerEURL } from "@/lib/calculerEURL";
 import { cn } from "@/lib/utils";
 
 import styles from "./simulateur.module.css";
+import { calculerSASU } from "@/lib/calculerSASU";
 
 interface SimulateurContainerProps
   extends Pick<React.HTMLAttributes<HTMLDivElement>, "children"> {}
@@ -168,13 +169,17 @@ const steps = {
     </>
   ),
   résultat: function StepRésultat({ goToStep, patchState, state }) {
-    const [{ me, eurl, stale }, setState] = useState(() => ({
+    const [{ me, eurl, sasu, stale }, setState] = useState(() => ({
       me: calculerME({
         nature: "libérale",
         ca: state.ca,
       }),
       eurl: calculerEURL({
         nature: "libérale",
+        ca: state.ca,
+        rémunération: state.rémunération,
+      }),
+      sasu: calculerSASU({
         ca: state.ca,
         rémunération: state.rémunération,
       }),
@@ -197,6 +202,10 @@ const steps = {
             ca: state.ca,
             rémunération: state.rémunération,
           }),
+          sasu: calculerSASU({
+            ca: state.ca,
+            rémunération: state.rémunération,
+          }),
           stale: false,
         });
       }, 250);
@@ -205,6 +214,10 @@ const steps = {
 
     const eurlDifférence = Math.round(
       ((eurl.revenu + eurl.trésorerie) / me.revenu - 1) * 100,
+    );
+
+    const sasuDifférence = Math.round(
+      ((sasu.revenu + sasu.trésorerie) / me.revenu - 1) * 100,
     );
 
     return (
@@ -266,9 +279,8 @@ const steps = {
                 <Pen size={16} />
               </label>
             </SimulateurDescription>
-            <div className={cn(stale && "opacity-40")}>
+            <div className={cn("flex gap-2 flex-col", stale && "opacity-40")}>
               <Collapsible
-                className="mb-2"
                 trigger={
                   <span className="flex flex-col md:flex-row md:gap-2">
                     <span className="md:flex-1 md:text-xl md:font-medium">
@@ -420,6 +432,100 @@ const steps = {
                           <TableCell>Impôt sur les sociétés</TableCell>
                           <TableCell className="text-right">
                             {eurl.is} €/an
+                          </TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
+                  </>
+                }
+              />
+              <Collapsible
+                trigger={
+                  <span className="flex flex-col md:flex-row md:gap-2">
+                    <span className="md:flex-1 md:text-xl md:font-medium">
+                      SASU
+                    </span>
+                    <span className="flex items-center gap-1 text-xl font-medium">
+                      <span className="text-text-300 font-normal hidden md:inline">
+                        Recettes
+                      </span>{" "}
+                      {sasu.revenu + sasu.trésorerie} €/an
+                      <span className="inline-flex items-center gap-1 md:w-[60px]">
+                        {sasuDifférence >= 0 ? (
+                          <>
+                            <span className="bg-positive-50 text-positive-500 rounded-full p-1">
+                              <TrendingUp size={16} />
+                            </span>
+                            <span className="text-text-300 text-sm">
+                              +{sasuDifférence}%
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="bg-negative-50 text-negative-500 rounded-full p-1">
+                              <TrendingDown size={16} />
+                            </span>
+                            <span className="text-text-300 text-sm">
+                              {sasuDifférence}%
+                            </span>
+                          </>
+                        )}
+                      </span>
+                    </span>
+                  </span>
+                }
+                content={
+                  <>
+                    <Table className="mb-10">
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-full">Recettes</TableHead>
+                          <TableHead className="text-right">
+                            {sasu.revenu + sasu.trésorerie} €/an
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        <TableRow>
+                          <TableCell>Revenu</TableCell>
+                          <TableCell className="text-right">
+                            {sasu.revenu} €/an
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell>Trésorerie</TableCell>
+                          <TableCell className="text-right">
+                            {sasu.trésorerie} €/an
+                          </TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
+                    <Table className="mb-10">
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-full">Dépenses</TableHead>
+                          <TableHead className="text-right">
+                            {sasu.cotisations + sasu.ir + sasu.is} €/an
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        <TableRow>
+                          <TableCell>Cotisations</TableCell>
+                          <TableCell className="text-right">
+                            {sasu.cotisations} €/an
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell>Impôt sur le revenu</TableCell>
+                          <TableCell className="text-right">
+                            {sasu.ir} €/an
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell>Impôt sur les sociétés</TableCell>
+                          <TableCell className="text-right">
+                            {sasu.is} €/an
                           </TableCell>
                         </TableRow>
                       </TableBody>
