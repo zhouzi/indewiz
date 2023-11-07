@@ -1,4 +1,4 @@
-import Engine, { formatValue } from "publicodes";
+import Engine from "publicodes";
 import rules from "modele-social";
 
 const microEntreprise = new Engine(rules);
