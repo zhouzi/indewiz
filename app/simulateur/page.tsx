@@ -2,13 +2,7 @@
 
 "use client";
 
-import {
-  FunctionComponent,
-  useEffect,
-  useReducer,
-  useRef,
-  useState,
-} from "react";
+import { FunctionComponent, useEffect, useReducer, useState } from "react";
 import { produce } from "immer";
 
 import { Progress } from "@/components/ui/progress";
@@ -125,8 +119,8 @@ const steps = {
             Quel chiffre d'affaires prévois-tu de réaliser cette année ?
           </SimulateurQuestion>
           <SimulateurDescription>
-            Passé un seuil de chiffre d'affaires les avantages de la
-            micro-entreprise sont gommés.
+            La micro-entreprise devient désavantageuse lorsque ton chiffre
+            d'affaires se développe.
           </SimulateurDescription>
           <NumberInput
             onChange={(value) => patchState({ ca: value })}
@@ -174,7 +168,7 @@ const steps = {
     </>
   ),
   résultat: function StepRésultat({ goToStep, patchState, state }) {
-    const [{ me, eurl }, setState] = useState(() => ({
+    const [{ me, eurl, stale }, setState] = useState(() => ({
       me: calculerME({
         nature: "libérale",
         ca: state.ca,
@@ -184,9 +178,14 @@ const steps = {
         ca: state.ca,
         rémunération: state.rémunération,
       }),
+      stale: false,
     }));
 
     useEffect(() => {
+      setState((currentState) => ({
+        ...currentState,
+        stale: true,
+      }));
       const timeoutId = setTimeout(() => {
         setState({
           me: calculerME({
@@ -198,6 +197,7 @@ const steps = {
             ca: state.ca,
             rémunération: state.rémunération,
           }),
+          stale: false,
         });
       }, 250);
       return () => clearTimeout(timeoutId);
@@ -206,8 +206,6 @@ const steps = {
     const eurlDifférence = Math.round(
       ((eurl.revenu + eurl.trésorerie) / me.revenu - 1) * 100,
     );
-
-    const inputRef = useRef<HTMLInputElement>(null);
 
     return (
       <>
@@ -223,26 +221,32 @@ const steps = {
               </div>
             </div>
             <SimulateurDescription>
-              En te versant une rémunération net de
-              <span
-                className="inline-flex items-center gap-1 cursor-pointer p-2"
-                onClick={(event) => {
-                  const input = inputRef.current;
-
-                  if (input == null) {
-                    return;
-                  }
-
-                  if (event.target === input) {
-                    return;
-                  }
-
-                  input.select();
-                }}
-              >
+              Avec un chiffre d'affaires de{" "}
+              <label className="inline-flex items-center gap-1 cursor-pointer p-1">
                 <span className="text-text border-b-[1px] border-b-text leading-tight">
                   <input
-                    ref={inputRef}
+                    type="text"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    onChange={(event) => {
+                      const value = Number(event.currentTarget.value);
+                      if (isNaN(value)) return;
+
+                      patchState({ ca: Number(event.target.value) });
+                    }}
+                    onFocus={(event) => event.currentTarget.select()}
+                    value={state.ca}
+                    className="inline bg-transparent focus:outline-none"
+                    style={{ width: `${String(state.ca).length}ch` }}
+                  />
+                  €/an
+                </span>
+                <Pen size={16} />
+              </label>{" "}
+              et une rémunération net de
+              <label className="inline-flex items-center gap-1 cursor-pointer p-1">
+                <span className="text-text border-b-[1px] border-b-text leading-tight">
+                  <input
                     type="text"
                     inputMode="numeric"
                     pattern="[0-9]*"
@@ -252,6 +256,7 @@ const steps = {
 
                       patchState({ rémunération: Number(event.target.value) });
                     }}
+                    onFocus={(event) => event.currentTarget.select()}
                     value={state.rémunération}
                     className="inline bg-transparent focus:outline-none"
                     style={{ width: `${String(state.rémunération).length}ch` }}
@@ -259,168 +264,170 @@ const steps = {
                   €/mois
                 </span>
                 <Pen size={16} />
-              </span>
+              </label>
             </SimulateurDescription>
-            <Collapsible
-              className="mb-2"
-              trigger={
-                <span className="flex flex-col md:flex-row md:gap-2">
-                  <span className="md:flex-1 md:text-xl md:font-medium">
-                    Micro-entreprise{" "}
-                    <small className="text-sm font-normal text-text-300">
-                      (situation actuelle)
-                    </small>
-                  </span>
-                  <span className="flex items-center gap-1 text-xl font-medium">
-                    <span className="text-text-300 font-normal hidden md:inline">
-                      Résultat
-                    </span>{" "}
-                    {me.revenu} €/an
-                    <span className="inline-flex items-center gap-1 md:w-[60px]" />
-                  </span>
-                </span>
-              }
-              content={
-                <>
-                  <Table className="mb-10">
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="w-full">Entrées</TableHead>
-                        <TableHead className="text-right">
-                          {me.revenu} €/an
-                        </TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      <TableRow>
-                        <TableCell>Revenu</TableCell>
-                        <TableCell className="text-right">
-                          {me.revenu} €/an
-                        </TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                  <Table className="mb-10">
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="w-full">Sorties</TableHead>
-                        <TableHead className="text-right">
-                          {me.cotisations + me.ir} €/an
-                        </TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      <TableRow>
-                        <TableCell>Cotisations</TableCell>
-                        <TableCell className="text-right">
-                          {me.cotisations} €/an
-                        </TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell>Impôt sur le revenu</TableCell>
-                        <TableCell className="text-right">
-                          {me.ir} €/an
-                        </TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </>
-              }
-            />
-            <Collapsible
-              trigger={
-                <span className="flex flex-col md:flex-row md:gap-2">
-                  <span className="md:flex-1 md:text-xl md:font-medium">
-                    EURL
-                  </span>
-                  <span className="flex items-center gap-1 text-xl font-medium">
-                    <span className="text-text-300 font-normal hidden md:inline">
-                      Résultat
-                    </span>{" "}
-                    {eurl.revenu + eurl.trésorerie} €/an
-                    <span className="inline-flex items-center gap-1 md:w-[60px]">
-                      {eurlDifférence >= 0 ? (
-                        <>
-                          <span className="bg-positive-50 text-positive-500 rounded-full p-1">
-                            <TrendingUp size={16} />
-                          </span>
-                          <span className="text-text-300 text-sm">
-                            +{eurlDifférence}%
-                          </span>
-                        </>
-                      ) : (
-                        <>
-                          <span className="bg-negative-50 text-negative-500 rounded-full p-1">
-                            <TrendingDown size={16} />
-                          </span>
-                          <span className="text-text-300 text-sm">
-                            {eurlDifférence}%
-                          </span>
-                        </>
-                      )}
+            <div className={cn(stale && "opacity-40")}>
+              <Collapsible
+                className="mb-2"
+                trigger={
+                  <span className="flex flex-col md:flex-row md:gap-2">
+                    <span className="md:flex-1 md:text-xl md:font-medium">
+                      Micro-entreprise{" "}
+                      <small className="text-sm font-normal text-text-300">
+                        (situation actuelle)
+                      </small>
+                    </span>
+                    <span className="flex items-center gap-1 text-xl font-medium">
+                      <span className="text-text-300 font-normal hidden md:inline">
+                        Recettes
+                      </span>{" "}
+                      {me.revenu} €/an
+                      <span className="inline-flex items-center gap-1 md:w-[60px]" />
                     </span>
                   </span>
-                </span>
-              }
-              content={
-                <>
-                  <Table className="mb-10">
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="w-full">Entrées</TableHead>
-                        <TableHead className="text-right">
-                          {eurl.revenu + eurl.trésorerie} €/an
-                        </TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      <TableRow>
-                        <TableCell>Revenu</TableCell>
-                        <TableCell className="text-right">
-                          {eurl.revenu} €/an
-                        </TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell>Trésorerie</TableCell>
-                        <TableCell className="text-right">
-                          {eurl.trésorerie} €/an
-                        </TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                  <Table className="mb-10">
-                    <TableHeader>
-                      <TableRow>
-                        <TableHead className="w-full">Sorties</TableHead>
-                        <TableHead className="text-right">
-                          {eurl.cotisations + eurl.ir + eurl.is} €/an
-                        </TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      <TableRow>
-                        <TableCell>Cotisations</TableCell>
-                        <TableCell className="text-right">
-                          {eurl.cotisations} €/an
-                        </TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell>Impôt sur le revenu</TableCell>
-                        <TableCell className="text-right">
-                          {eurl.ir} €/an
-                        </TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell>Impôt sur les sociétés</TableCell>
-                        <TableCell className="text-right">
-                          {eurl.is} €/an
-                        </TableCell>
-                      </TableRow>
-                    </TableBody>
-                  </Table>
-                </>
-              }
-            />
+                }
+                content={
+                  <>
+                    <Table className="mb-10">
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-full">Recettes</TableHead>
+                          <TableHead className="text-right">
+                            {me.revenu} €/an
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        <TableRow>
+                          <TableCell>Revenu</TableCell>
+                          <TableCell className="text-right">
+                            {me.revenu} €/an
+                          </TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
+                    <Table className="mb-10">
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-full">Dépenses</TableHead>
+                          <TableHead className="text-right">
+                            {me.cotisations + me.ir} €/an
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        <TableRow>
+                          <TableCell>Cotisations</TableCell>
+                          <TableCell className="text-right">
+                            {me.cotisations} €/an
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell>Impôt sur le revenu</TableCell>
+                          <TableCell className="text-right">
+                            {me.ir} €/an
+                          </TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
+                  </>
+                }
+              />
+              <Collapsible
+                trigger={
+                  <span className="flex flex-col md:flex-row md:gap-2">
+                    <span className="md:flex-1 md:text-xl md:font-medium">
+                      EURL
+                    </span>
+                    <span className="flex items-center gap-1 text-xl font-medium">
+                      <span className="text-text-300 font-normal hidden md:inline">
+                        Recettes
+                      </span>{" "}
+                      {eurl.revenu + eurl.trésorerie} €/an
+                      <span className="inline-flex items-center gap-1 md:w-[60px]">
+                        {eurlDifférence >= 0 ? (
+                          <>
+                            <span className="bg-positive-50 text-positive-500 rounded-full p-1">
+                              <TrendingUp size={16} />
+                            </span>
+                            <span className="text-text-300 text-sm">
+                              +{eurlDifférence}%
+                            </span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="bg-negative-50 text-negative-500 rounded-full p-1">
+                              <TrendingDown size={16} />
+                            </span>
+                            <span className="text-text-300 text-sm">
+                              {eurlDifférence}%
+                            </span>
+                          </>
+                        )}
+                      </span>
+                    </span>
+                  </span>
+                }
+                content={
+                  <>
+                    <Table className="mb-10">
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-full">Recettes</TableHead>
+                          <TableHead className="text-right">
+                            {eurl.revenu + eurl.trésorerie} €/an
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        <TableRow>
+                          <TableCell>Revenu</TableCell>
+                          <TableCell className="text-right">
+                            {eurl.revenu} €/an
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell>Trésorerie</TableCell>
+                          <TableCell className="text-right">
+                            {eurl.trésorerie} €/an
+                          </TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
+                    <Table className="mb-10">
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-full">Dépenses</TableHead>
+                          <TableHead className="text-right">
+                            {eurl.cotisations + eurl.ir + eurl.is} €/an
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        <TableRow>
+                          <TableCell>Cotisations</TableCell>
+                          <TableCell className="text-right">
+                            {eurl.cotisations} €/an
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell>Impôt sur le revenu</TableCell>
+                          <TableCell className="text-right">
+                            {eurl.ir} €/an
+                          </TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell>Impôt sur les sociétés</TableCell>
+                          <TableCell className="text-right">
+                            {eurl.is} €/an
+                          </TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
+                  </>
+                }
+              />
+            </div>
           </SimulateurContent>
           <SimulateurActions className="md:hidden">
             <Button onClick={() => goToStep("nature")}>

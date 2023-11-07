@@ -1,5 +1,5 @@
-const title = "IndeWIZ - Simulateurs pour indépendants";
+const title = "IndeWIZ - Simulateur de rémunération";
 const description =
-  "IndeWIZ est une collection de simulateurs qui mettent en lumière les avantages et inconvénients des différents statuts juridiques. Plus qu'un comparatif, ils permettent une étude des différentes stratégies répondants à une variété de besoins.";
+  "Contrairement à une micro-entreprise, une société te permet d'ajuster ta rémunération à ton besoin, entraînant une réduction de cotisations et d'impôts.";
 
 export { title, description };

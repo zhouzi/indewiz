@@ -8,6 +8,7 @@ import { Progress } from "@/components/ui/progress";
 
 import styles from "./home.module.css";
 import { cn } from "@/lib/utils";
+import { description } from "@/constants/metadata";
 
 interface HeroNoticeProps
   extends Pick<
@@ -41,10 +42,7 @@ export default function Home() {
               rémunération
             </span>
           </h1>
-          <p className="text-text-300 mb-12">
-            Contrairement à une micro-entreprise une société permet d'ajuster ta
-            rémunération et conduire à une économie de cotisations et d'impôts.
-          </p>
+          <p className="text-text-300 mb-12">{description}</p>
           <Button className="w-full md:w-auto" asChild>
             <Link href="/simulateur">Lance le simulateur</Link>
           </Button>
