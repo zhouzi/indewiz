@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --text-300: #475766;
+    --text-500: #021626;
+    --secondary-50: #dde9f5;
+    --secondary-300: #a1aab2;
+    --primary-50: #e1effa;
+    --primary-500: #1789e5;
+    --primary-700: #095594;
+    --positive-50: #e8fae1;
+    --positive-500: #268006;
+    --negative-50: #fae1ea;
+    --negative-500: #6f213d;
+  }
+}
+
+@layer base {
+  html {
+    position: relative;
+    font-size: 14px;
+    overflow-x: hidden;
+    height: 100%;
+  }
+  @media (min-width: 768px) {
+    html {
+      font-size: 16px;
+    }
+  }
+  @media (min-width: 1024px) {
+    html {
+      font-size: 18px;
+    }
+  }
+}

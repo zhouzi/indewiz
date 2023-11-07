@@ -1,29 +1,51 @@
-/* eslint-disable react/no-unescaped-entities */
-import NextLink from "next/link";
-import { Logo } from "./ui/logo";
-import { Link } from "./ui/link";
+import Link from "next/link";
+
+import { MobileMenu } from "./mobileMenu";
+import { Button } from "./ui/button";
 
 const Header = () => {
   return (
-    <header className="flex flex-col sm:flex-row items-center max-w-7xl m-auto py-6 sm:mb-10 px-4">
-      <NextLink
-        href="/"
-        className="inline-flex gap-2 items-center sm:pr-4 mb-2 sm:mb-0"
-      >
-        <Logo />
-        <span className="px-2 py-1 bg-white text-secondary uppercase font-medium text-sm rounded">
-          beta
-        </span>
-      </NextLink>
-      <p className="flex-1 text-center sm:text-left md:text-right text-secondary">
-        Des remarques ? Des idées d'évolution ?{" "}
-        <Link
-          href="https://docs.google.com/forms/d/e/1FAIpQLSee1ebfvyT2z7IiFFxdYujP3nyieMmoha61bwALN8Ac_afUHg/viewform"
-          target="_blank"
-        >
-          Contacte-nous
+    <header className="relative">
+      <div className="container py-4 flex items-center">
+        <Link href="/" className="inline-flex items-end gap-2 flex-1">
+          <img
+            src="/logo.png"
+            alt="Logo indéwiz"
+            className="h-[24px] w-auto hidden md:inline-flex"
+          />
+          <img
+            src="/logo-small.png"
+            alt="Logo indéwiz"
+            className="h-[24px] w-auto inline-flex md:hidden"
+          />
+          <span className="uppercase rounded text-xs bg-primary-50 px-2 py-1 leading-none text-primary-700">
+            beta
+          </span>
         </Link>
-      </p>
+        <nav>
+          <ul className="flex gap-2">
+            <li className="md:hidden">
+              <MobileMenu />
+            </li>
+            <li className="hidden md:inline-flex">
+              <Button variant="ghost" asChild>
+                <Link href="/a-propos">À propos</Link>
+              </Button>
+            </li>
+            <li className="hidden md:inline-flex">
+              <Button variant="secondary" asChild>
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSee1ebfvyT2z7IiFFxdYujP3nyieMmoha61bwALN8Ac_afUHg/viewform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Contacte-nous
+                </a>
+              </Button>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 };

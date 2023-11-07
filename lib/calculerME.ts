@@ -25,18 +25,18 @@ function calculerME({
 
   const revenu = Math.round(
     microEntreprise.evaluate(
-      "dirigeant . auto-entrepreneur . revenu net . après impôt"
-    ).nodeValue as number
+      "dirigeant . auto-entrepreneur . revenu net . après impôt",
+    ).nodeValue as number,
   );
   const cotisations = Math.round(
     microEntreprise.evaluate({
       valeur: "dirigeant . auto-entrepreneur . cotisations et contributions",
       unité: "€/an",
-    }).nodeValue as number
+    }).nodeValue as number,
   );
   const ir = Math.round(
     microEntreprise.evaluate("dirigeant . rémunération . impôt")
-      .nodeValue as number
+      .nodeValue as number,
   );
 
   return {

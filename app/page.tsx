@@ -1,69 +1,79 @@
 /* eslint-disable react/no-unescaped-entities */
 
-import { Button } from "@/components/ui/button";
+import { TrendingDown, TrendingUp } from "lucide-react";
 import Link from "next/link";
+
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
 
 import styles from "./home.module.css";
 import { cn } from "@/lib/utils";
+import { description } from "@/constants/metadata";
+
+interface HeroNoticeProps
+  extends Pick<
+    React.HTMLAttributes<HTMLDivElement>,
+    "className" | "children"
+  > {}
+
+const HeroNotice = ({ className, children }: HeroNoticeProps) => {
+  return (
+    <div
+      className={cn(
+        "absolute bg-opacity-80 bg-white rounded-full py-2 px-6 left-1/2 -translate-x-1/2 text-primary-700 font-medium text-xl flex gap-1 items-center whitespace-nowrap",
+        styles.heroNotice,
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+};
 
 export default function Home() {
   return (
-    <main className="flex flex-col md:flex-row max-w-7xl m-auto py-6 px-4">
-      <div className="flex-1 flex flex-col justify-center md:pr-8">
-        <div className="max-w-2xl">
-          <h1 className="font-medium text-4xl mb-4">
-            Trouve enfin le statut qui convient le mieux à ton{" "}
-            <strong className="bg-gradient-to-t from-primary-dark to-primary bg-clip-text text-transparent">
-              business
-            </strong>
+    <>
+      <Progress className="md:mb-12" />
+      <main className="flex-1 flex flex-col md:flex-row gap-14 md:gap-8 md:items-center container pb-4">
+        <div className="text-center md:text-left md:flex-1">
+          <h1 className="text-3xl md:text-4xl font-bold md:font-medium mb-6">
+            Paie moins de cotisations et d'impôts en optimisant ta{" "}
+            <span className="bg-gradient-to-t from-primary-700 to-primary-500 bg-clip-text text-transparent">
+              rémunération
+            </span>
           </h1>
-          <p className="text-secondary mb-8 md:mb-12 text-xl">
-            En se basant sur ta situation et tes objectifs, IndeWIZ t'indiquera
-            si faire évoluer le statut juridique de ta micro-entreprise te
-            permettra de gagner de l'argent en réduisant tes cotisations et tes
-            impôts.
-          </p>
-          <Button asChild>
+          <p className="text-text-300 mb-12">{description}</p>
+          <Button className="w-full md:w-auto" asChild>
             <Link href="/simulateur">Lance le simulateur</Link>
           </Button>
         </div>
-      </div>
-      <div
-        className="relative self-center mt-8 md:mt-0"
-        style={{ maxWidth: "70%" }}
-      >
-        <span
-          className={cn(styles.floatingLabel, "px-6 py-1 text-xl font-medium")}
-          style={{
-            top: "80%",
-            left: 0,
-            transform: "translateX(-20%)",
-          }}
+        <div
+          className={cn("relative m-auto px-12 md:max-w-[38%]", styles.hero)}
         >
-          EI
-        </span>
-        <span
-          className={cn(styles.floatingLabel, "px-6 py-1 text-xl font-medium")}
-          style={{
-            top: "40%",
-            right: 0,
-            transform: "translateX(60%)",
-          }}
-        >
-          EURL
-        </span>
-        <span
-          className={cn(styles.floatingLabel, "px-6 py-1 text-xl font-medium")}
-          style={{
-            top: "20%",
-            left: 0,
-            transform: "translateX(-40%)",
-          }}
-        >
-          SASU
-        </span>
-        <img src="/home-picture.png" alt="" width={369} height="auto" />
-      </div>
-    </main>
+          <HeroNotice className="top-[10%] left-[66%] -z-10">EURL ?</HeroNotice>
+          <HeroNotice className="top-[25%] left-[25%]">SASU ?</HeroNotice>
+          <HeroNotice className="top-[42%] left-[58%]">
+            <span className="p-1 bg-negative-50 text-negative-500 rounded-full inline-flex">
+              <TrendingDown size={16} />
+            </span>
+            <span>
+              -6000€/an{" "}
+              <span className="text-sm text-text-300 font-normal">en SASU</span>
+            </span>
+          </HeroNotice>
+          <HeroNotice className="top-[60%] left-[30%]">EI ?</HeroNotice>
+          <HeroNotice className="top-[80%] left-[64%]">
+            <span className="p-1 bg-positive-50 text-positive-500 rounded-full inline-flex">
+              <TrendingUp size={16} />
+            </span>
+            <span>
+              +3000€/an{" "}
+              <span className="text-sm text-text-300 font-normal">en EURL</span>
+            </span>
+          </HeroNotice>
+          <img src="/hero.png" alt="" className="max-w-[400px] w-full" />
+        </div>
+      </main>
+    </>
   );
 }

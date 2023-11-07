@@ -1,28 +1,58 @@
-import type { Config } from "tailwindcss";
+import { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: "1rem",
+      screens: {
+        sm: "100%",
+        md: "100%",
+        lg: "1024px",
+        xl: "1280px",
+      },
+    },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+      },
       colors: {
-        primary: "#1789E5",
-        "primary-dark": "#095594",
-        text: "#021626",
-        background: "#F5F7FA",
-        secondary: "#5C6166",
-        "secondary-lighter": "#A1AAB2",
-        "secondary-lightest": "#CFDAE5",
-        "positive-light": "#E8FAE1",
-        "positive-dark": "#268006",
-        "negative-light": "#FAE2E1",
-        "negative-dark": "#800A06",
+        primary: {
+          DEFAULT: "var(--primary-500)",
+          50: "var(--primary-50)",
+          500: "var(--primary-500)",
+          700: "var(--primary-700)",
+        },
+        secondary: {
+          DEFAULT: "var(--secondary-50)",
+          50: "var(--secondary-50)",
+          300: "var(--secondary-300)",
+        },
+        text: {
+          DEFAULT: "var(--text-500)",
+          300: "var(--text-300)",
+          500: "var(--text-500)",
+        },
+        positive: {
+          DEFAULT: "var(--positive-500)",
+          50: "var(--positive-50)",
+          500: "var(--positive-500)",
+        },
+        negative: {
+          DEFAULT: "var(--negative-500)",
+          50: "var(--negative-50)",
+          500: "var(--negative-500)",
+        },
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };
+
 export default config;

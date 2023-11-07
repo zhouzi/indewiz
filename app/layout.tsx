@@ -1,27 +1,27 @@
-import "./globals.css";
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { DM_Sans as FontSans } from "next/font/google";
+import Head from "next/head";
 import { Analytics } from "@vercel/analytics/react";
+
 import { Header } from "@/components/header";
 import { cn } from "@/lib/utils";
-import Head from "next/head";
-import { Footer } from "@/components/footer";
+import { description, title } from "@/constants/metadata";
 
-const dmSans = DM_Sans({ subsets: ["latin"] });
+import "./globals.css";
 
-const title =
-  "IndeWIZ - Trouve enfin le statut qui convient le mieux à ton business";
-const description =
-  "En se basant sur ta situation et tes objectifs, IndeWIZ t'indiquera si faire évoluer le statut juridique de ta micro-entreprise te permettra de gagner de l'argent en réduisant tes cotisations et tes impôts.";
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
-export const metadata = {
+export const metadata: Metadata = {
   title,
   description,
   openGraph: {
     title,
     description,
   },
-} satisfies Metadata;
+};
 
 export default function RootLayout({
   children,
@@ -33,10 +33,14 @@ export default function RootLayout({
       <Head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </Head>
-      <body className={cn(dmSans.className, "text-text bg-background")}>
+      <body
+        className={cn(
+          "bg-background font-sans antialiased flex flex-col w-full overflow-x-hidden text-text-500 relative min-h-full",
+          fontSans.variable,
+        )}
+      >
         <Header />
         {children}
-        <Footer />
         <Analytics />
       </body>
     </html>

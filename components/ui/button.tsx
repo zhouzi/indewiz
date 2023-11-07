@@ -4,20 +4,22 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
+import styles from "./button.module.css";
+
 const buttonVariants = cva(
-  "py-4 px-12 text-xl rounded border border-transparent inline-flex justify-center",
+  "inline-flex px-12 py-4 rounded font-medium text-primary-700 justify-center",
   {
     variants: {
       variant: {
-        primary:
-          "bg-gradient-to-t from-primary-dark to-primary font-bold text-white",
-        secondary: "border-primary-dark text-primary-dark font-medium",
+        default: cn("text-white", styles.variantDefault),
+        secondary: cn(styles.variantSecondary),
+        ghost: cn(styles.variantGhost),
       },
     },
     defaultVariants: {
-      variant: "primary",
+      variant: "default",
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -36,7 +38,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       />
     );
-  }
+  },
 );
 Button.displayName = "Button";
 

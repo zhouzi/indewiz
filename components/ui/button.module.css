@@ -1,0 +1,57 @@
+.variantDefault {
+  background: linear-gradient(90deg, #095594 0%, #07467a 50%, #063861 100%);
+  box-shadow:
+    8px 8px 8px 0px rgba(109, 183, 242, 0.3) inset,
+    -8px -8px 8px 0px rgba(1, 6, 10, 0.2) inset,
+    inset 0 0 0 2px rgba(32, 52, 69, 0.5);
+}
+.variantDefault:hover {
+  background: linear-gradient(93deg, #063861 0%, #042947 46.87%, #031a2e 100%);
+  box-shadow:
+    8px 8px 8px 0px rgba(109, 183, 242, 0.3) inset,
+    -8px -8px 8px 0px rgba(1, 6, 10, 0.2) inset,
+    inset 0 0 0 2px rgba(32, 52, 69, 0.5);
+}
+.variantDefault:active {
+  background: linear-gradient(90deg, #095594 0%, #07467a 50%, #063861 100%);
+  box-shadow:
+    -8px -8px 8px 0px rgba(48, 156, 242, 0.3) inset,
+    8px 8px 8px 0px rgba(1, 6, 10, 0.2) inset,
+    inset 0 0 0 2px rgba(32, 52, 69, 0.5);
+}
+
+.variantSecondary {
+  background: linear-gradient(90deg, #dceaf5 0%, #c4dff5 50%, #abd4f5 100%);
+  box-shadow:
+    8px 8px 12px 0px rgba(245, 248, 250, 0.9) inset,
+    -8px -8px 12px 0px rgba(116, 145, 168, 0.3) inset,
+    inset 0 0 0 2px rgba(138, 189, 229, 0.5);
+}
+.variantSecondary:hover {
+  background: linear-gradient(
+    93deg,
+    #edf2f5 0.31%,
+    #dceaf5 47.81%,
+    #c4dff5 98.82%
+  );
+  box-shadow:
+    8px 8px 12px 0px rgba(245, 248, 250, 0.9) inset,
+    -8px -8px 12px 0px rgba(116, 145, 168, 0.3) inset,
+    inset 0 0 0 2px rgba(138, 189, 229, 0.5);
+}
+.variantSecondary:active {
+  background: linear-gradient(93deg, #dceaf5 0%, #c4dff5 50%, #abd4f5 100%);
+  box-shadow:
+    -8px -8px 12px 0px rgba(245, 248, 250, 0.9) inset,
+    8px 8px 12px 0px rgba(116, 145, 168, 0.3) inset,
+    inset 0 0 0 2px rgba(138, 189, 229, 0.5);
+}
+
+.variantGhost {
+}
+.variantGhost:hover {
+  background: radial-gradient(37.7% 37.84% at 50% 0%, #faf5f5 0%, #e1ebf5 100%);
+  box-shadow:
+    2px 2px 4px 0px #f5f8fa inset,
+    -2px -2px 8px 0px rgba(7, 70, 122, 0.05) inset;
+}

@@ -1,3 +1,0 @@
-.input:not(:focus) ~ .inputFocusRing {
-  visibility: hidden;
-}

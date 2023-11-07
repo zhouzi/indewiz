@@ -37,7 +37,8 @@ function calculerEURL({
     "entreprise . catégorie juridique": "'SARL'",
   });
   const revenuBrut = Math.round(
-    eurlEngine.evaluate("dirigeant . rémunération . totale").nodeValue as number
+    eurlEngine.evaluate("dirigeant . rémunération . totale")
+      .nodeValue as number,
   );
   const résultat = ca - revenuBrut;
 
@@ -50,19 +51,19 @@ function calculerEURL({
     eurlEngine.evaluate({
       valeur: "dirigeant . rémunération . net . après impôt",
       unité: "€/an",
-    }).nodeValue as number
+    }).nodeValue as number,
   );
   const is = Math.round(
     isEngine.evaluate("entreprise . imposition . IS . montant")
-      .nodeValue as number
+      .nodeValue as number,
   );
   const cotisations = Math.round(
     eurlEngine.evaluate(
-      "dirigeant . indépendant . cotisations et contributions"
-    ).nodeValue as number
+      "dirigeant . indépendant . cotisations et contributions",
+    ).nodeValue as number,
   );
   const ir = Math.round(
-    eurlEngine.evaluate("impôt . montant").nodeValue as number
+    eurlEngine.evaluate("impôt . montant").nodeValue as number,
   );
 
   return {
