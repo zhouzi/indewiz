@@ -220,6 +220,63 @@ const steps = {
       ((sasu.revenu + sasu.trésorerie) / me.revenu - 1) * 100,
     );
 
+    const groups = [
+      {
+        title: "Micro-entreprise",
+        titleSuffix: "(situation actuelle)",
+        différence: null,
+        compteBancairePro: [
+          { label: "Chiffre d'affaires", value: state.ca },
+          { label: "Virement vers compte perso", value: -me.revenu - me.ir },
+          { label: "Cotisations", value: -me.cotisations },
+        ],
+        compteBancairePerso: [
+          { label: "Virement depuis compte pro", value: me.revenu + me.ir },
+          { label: "Impôt sur le revenu", value: -me.ir },
+        ],
+      },
+      {
+        title: "EURL",
+        titleSuffix: null,
+        différence: Math.round(
+          ((eurl.revenu + eurl.trésorerie) / me.revenu - 1) * 100,
+        ),
+        compteBancairePro: [
+          { label: "Chiffre d'affaires", value: state.ca },
+          {
+            label: "Virement vers compte perso",
+            value: -eurl.revenu - eurl.ir,
+          },
+          { label: "Cotisations", value: -eurl.cotisations },
+          { label: "Impôt sur les sociétés", value: -eurl.is },
+        ],
+        compteBancairePerso: [
+          { label: "Virement depuis compte pro", value: eurl.revenu + eurl.ir },
+          { label: "Impôt sur le revenu", value: -eurl.ir },
+        ],
+      },
+      {
+        title: "SASU",
+        titleSuffix: null,
+        différence: Math.round(
+          ((sasu.revenu + sasu.trésorerie) / me.revenu - 1) * 100,
+        ),
+        compteBancairePro: [
+          { label: "Chiffre d'affaires", value: state.ca },
+          {
+            label: "Virement vers compte perso",
+            value: -sasu.revenu - sasu.ir,
+          },
+          { label: "Cotisations", value: -sasu.cotisations },
+          { label: "Impôt sur les sociétés", value: -sasu.is },
+        ],
+        compteBancairePerso: [
+          { label: "Virement depuis compte pro", value: sasu.revenu + sasu.ir },
+          { label: "Impôt sur le revenu", value: -sasu.ir },
+        ],
+      },
+    ];
+
     return (
       <>
         <Progress value={100 / 1} />
@@ -280,259 +337,117 @@ const steps = {
               </label>
             </SimulateurDescription>
             <div className={cn("flex gap-2 flex-col", stale && "opacity-40")}>
-              <Collapsible
-                trigger={
-                  <span className="flex flex-col md:flex-row md:gap-2">
-                    <span className="md:flex-1 md:text-xl md:font-medium">
-                      Micro-entreprise{" "}
-                      <small className="text-sm font-normal text-text-300">
-                        (situation actuelle)
-                      </small>
-                    </span>
-                    <span className="flex items-center gap-1 text-xl font-medium">
-                      <span className="text-text-300 font-normal hidden md:inline">
-                        Recettes
-                      </span>{" "}
-                      {me.revenu} €/an
-                      <span className="inline-flex items-center gap-1 md:w-[60px]" />
-                    </span>
-                  </span>
-                }
-                content={
-                  <>
-                    <Table className="mb-10">
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="w-full">Recettes</TableHead>
-                          <TableHead className="text-right">
-                            {me.revenu} €/an
-                          </TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell>Revenu</TableCell>
-                          <TableCell className="text-right">
-                            {me.revenu} €/an
-                          </TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-                    <Table className="mb-10">
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="w-full">Dépenses</TableHead>
-                          <TableHead className="text-right">
-                            {me.cotisations + me.ir} €/an
-                          </TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell>Cotisations</TableCell>
-                          <TableCell className="text-right">
-                            {me.cotisations} €/an
-                          </TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>Impôt sur le revenu</TableCell>
-                          <TableCell className="text-right">
-                            {me.ir} €/an
-                          </TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-                  </>
-                }
-              />
-              <Collapsible
-                trigger={
-                  <span className="flex flex-col md:flex-row md:gap-2">
-                    <span className="md:flex-1 md:text-xl md:font-medium">
-                      EURL
-                    </span>
-                    <span className="flex items-center gap-1 text-xl font-medium">
-                      <span className="text-text-300 font-normal hidden md:inline">
-                        Recettes
-                      </span>{" "}
-                      {eurl.revenu + eurl.trésorerie} €/an
-                      <span className="inline-flex items-center gap-1 md:w-[60px]">
-                        {eurlDifférence >= 0 ? (
-                          <>
-                            <span className="bg-positive-50 text-positive-500 rounded-full p-1">
-                              <TrendingUp size={16} />
-                            </span>
-                            <span className="text-text-300 text-sm">
-                              +{eurlDifférence}%
-                            </span>
-                          </>
+              {groups.map((group) => (
+                <Collapsible
+                  key={group.title}
+                  trigger={
+                    <span className="flex flex-col md:flex-row md:gap-2">
+                      <span className="md:flex-1 md:text-xl md:font-medium">
+                        {group.title}{" "}
+                        {!!group.titleSuffix && (
+                          <small className="text-sm font-normal text-text-300">
+                            {group.titleSuffix}
+                          </small>
+                        )}
+                      </span>
+                      <span className="flex items-center gap-1 text-xl font-medium">
+                        <span className="text-text-300 font-normal hidden md:inline">
+                          Résultat
+                        </span>{" "}
+                        {[
+                          ...group.compteBancairePro,
+                          ...group.compteBancairePerso,
+                        ].reduce(
+                          (acc, transaction) => acc + transaction.value,
+                          0,
+                        )}{" "}
+                        €/an{" "}
+                        {group.différence == null ? (
+                          <span className="inline-flex items-center gap-1 md:w-[60px]" />
                         ) : (
-                          <>
-                            <span className="bg-negative-50 text-negative-500 rounded-full p-1">
-                              <TrendingDown size={16} />
-                            </span>
-                            <span className="text-text-300 text-sm">
-                              {eurlDifférence}%
-                            </span>
-                          </>
+                          <span className="inline-flex items-center gap-1 md:w-[60px]">
+                            {group.différence >= 0 ? (
+                              <>
+                                <span className="bg-positive-50 text-positive-500 rounded-full p-1">
+                                  <TrendingUp size={16} />
+                                </span>
+                                <span className="text-text-300 text-sm">
+                                  +{group.différence}%
+                                </span>
+                              </>
+                            ) : (
+                              <>
+                                <span className="bg-negative-50 text-negative-500 rounded-full p-1">
+                                  <TrendingDown size={16} />
+                                </span>
+                                <span className="text-text-300 text-sm">
+                                  {group.différence}%
+                                </span>
+                              </>
+                            )}
+                          </span>
                         )}
                       </span>
                     </span>
-                  </span>
-                }
-                content={
-                  <>
-                    <Table className="mb-10">
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="w-full">Recettes</TableHead>
-                          <TableHead className="text-right">
-                            {eurl.revenu + eurl.trésorerie} €/an
-                          </TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell>Revenu</TableCell>
-                          <TableCell className="text-right">
-                            {eurl.revenu} €/an
-                          </TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>Trésorerie</TableCell>
-                          <TableCell className="text-right">
-                            {eurl.trésorerie} €/an
-                          </TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-                    <Table className="mb-10">
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="w-full">Dépenses</TableHead>
-                          <TableHead className="text-right">
-                            {eurl.cotisations + eurl.ir + eurl.is} €/an
-                          </TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell>Cotisations</TableCell>
-                          <TableCell className="text-right">
-                            {eurl.cotisations} €/an
-                          </TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>Impôt sur le revenu</TableCell>
-                          <TableCell className="text-right">
-                            {eurl.ir} €/an
-                          </TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>Impôt sur les sociétés</TableCell>
-                          <TableCell className="text-right">
-                            {eurl.is} €/an
-                          </TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-                  </>
-                }
-              />
-              <Collapsible
-                trigger={
-                  <span className="flex flex-col md:flex-row md:gap-2">
-                    <span className="md:flex-1 md:text-xl md:font-medium">
-                      SASU
-                    </span>
-                    <span className="flex items-center gap-1 text-xl font-medium">
-                      <span className="text-text-300 font-normal hidden md:inline">
-                        Recettes
-                      </span>{" "}
-                      {sasu.revenu + sasu.trésorerie} €/an
-                      <span className="inline-flex items-center gap-1 md:w-[60px]">
-                        {sasuDifférence >= 0 ? (
-                          <>
-                            <span className="bg-positive-50 text-positive-500 rounded-full p-1">
-                              <TrendingUp size={16} />
-                            </span>
-                            <span className="text-text-300 text-sm">
-                              +{sasuDifférence}%
-                            </span>
-                          </>
-                        ) : (
-                          <>
-                            <span className="bg-negative-50 text-negative-500 rounded-full p-1">
-                              <TrendingDown size={16} />
-                            </span>
-                            <span className="text-text-300 text-sm">
-                              {sasuDifférence}%
-                            </span>
-                          </>
-                        )}
-                      </span>
-                    </span>
-                  </span>
-                }
-                content={
-                  <>
-                    <Table className="mb-10">
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="w-full">Recettes</TableHead>
-                          <TableHead className="text-right">
-                            {sasu.revenu + sasu.trésorerie} €/an
-                          </TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell>Revenu</TableCell>
-                          <TableCell className="text-right">
-                            {sasu.revenu} €/an
-                          </TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>Trésorerie</TableCell>
-                          <TableCell className="text-right">
-                            {sasu.trésorerie} €/an
-                          </TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-                    <Table className="mb-10">
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="w-full">Dépenses</TableHead>
-                          <TableHead className="text-right">
-                            {sasu.cotisations + sasu.ir + sasu.is} €/an
-                          </TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow>
-                          <TableCell>Cotisations</TableCell>
-                          <TableCell className="text-right">
-                            {sasu.cotisations} €/an
-                          </TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>Impôt sur le revenu</TableCell>
-                          <TableCell className="text-right">
-                            {sasu.ir} €/an
-                          </TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>Impôt sur les sociétés</TableCell>
-                          <TableCell className="text-right">
-                            {sasu.is} €/an
-                          </TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-                  </>
-                }
-              />
+                  }
+                  content={
+                    <>
+                      <Table className="mb-10">
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead className="w-full">
+                              Compte bancaire pro
+                            </TableHead>
+                            <TableHead className="text-right">
+                              {group.compteBancairePro.reduce(
+                                (acc, transaction) => acc + transaction.value,
+                                0,
+                              )}{" "}
+                              €/an
+                            </TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {group.compteBancairePro.map((transaction) => (
+                            <TableRow key={transaction.label}>
+                              <TableCell>{transaction.label}</TableCell>
+                              <TableCell className="text-right">
+                                {transaction.value} €/an
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                      <Table className="mb-10">
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead className="w-full">
+                              Compte bancaire perso
+                            </TableHead>
+                            <TableHead className="text-right">
+                              {group.compteBancairePerso.reduce(
+                                (acc, transaction) => acc + transaction.value,
+                                0,
+                              )}{" "}
+                              €/an
+                            </TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {group.compteBancairePerso.map((transaction) => (
+                            <TableRow key={transaction.label}>
+                              <TableCell>{transaction.label}</TableCell>
+                              <TableCell className="text-right">
+                                {transaction.value} €/an
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </>
+                  }
+                />
+              ))}
             </div>
           </SimulateurContent>
           <SimulateurActions className="md:hidden">
