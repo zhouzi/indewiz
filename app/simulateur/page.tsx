@@ -212,14 +212,6 @@ const steps = {
       return () => clearTimeout(timeoutId);
     }, [state.ca, state.rémunération]);
 
-    const eurlDifférence = Math.round(
-      ((eurl.revenu + eurl.trésorerie) / me.revenu - 1) * 100,
-    );
-
-    const sasuDifférence = Math.round(
-      ((sasu.revenu + sasu.trésorerie) / me.revenu - 1) * 100,
-    );
-
     const groups = [
       {
         title: "Micro-entreprise",
