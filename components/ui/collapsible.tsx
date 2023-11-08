@@ -33,7 +33,7 @@ const Collapsible = React.forwardRef<
           {open ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
         </span>
       </Trigger>
-      <Content className="py-3 pl-11 pr-11 md:pr-[122px]">{content}</Content>
+      <Content className="py-3 px-3 md:pl-11 md:pr-[122px]">{content}</Content>
     </Root>
   );
 });
