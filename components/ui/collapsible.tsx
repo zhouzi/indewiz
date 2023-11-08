@@ -24,7 +24,7 @@ const Collapsible = React.forwardRef<
     <Root ref={ref} {...props} open={open} onOpenChange={setOpen}>
       <Trigger
         className={cn(
-          "flex w-full py-5 pl-11 pr-2 border-2 rounded text-left items-center",
+          "flex w-full py-5 px-5 md:pl-11 md:pr-2 border-2 rounded text-left items-center",
           styles.trigger,
         )}
       >
@@ -33,7 +33,7 @@ const Collapsible = React.forwardRef<
           {open ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
         </span>
       </Trigger>
-      <Content className="py-3 px-3 md:pl-11 md:pr-[122px]">{content}</Content>
+      <Content className="py-3 px-5 md:pl-11 md:pr-[122px]">{content}</Content>
     </Root>
   );
 });
