@@ -156,7 +156,7 @@ const steps = {
           <NumberInput
             onChange={(value) => patchState({ rémunération: value })}
             value={state.rémunération}
-            afterIcon="€/an"
+            afterIcon="€/mois"
           />
         </SimulateurContent>
         <SimulateurActions>
