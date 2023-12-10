@@ -23,8 +23,8 @@ import { calculerME } from "@/lib/calculerME";
 import { calculerEURL } from "@/lib/calculerEURL";
 import { cn } from "@/lib/utils";
 
-import styles from "./simulateur.module.css";
 import { calculerSASU } from "@/lib/calculerSASU";
+import { Shadow } from "@/components/ui/shadow";
 
 interface SimulateurContainerProps
   extends Pick<React.HTMLAttributes<HTMLDivElement>, "children"> {}
@@ -489,12 +489,7 @@ export default function Simulateur() {
   return (
     <>
       <div className="absolute -z-10 pointer-events-none top-0 right-0 w-1/2 h-[420px]">
-        <div
-          className={cn(
-            "absolute top-0 right-0 -translate-y-1/3 translate-x-1/3 w-[200%] h-full",
-            styles.shadow,
-          )}
-        />
+        <Shadow />
       </div>
       <Step
         goToStep={(step: StepId) => dispatch({ type: "goToStep", step })}
