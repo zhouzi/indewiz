@@ -445,9 +445,7 @@ export default function Simulateur() {
 
   return (
     <>
-      <div className="absolute -z-10 pointer-events-none top-0 right-0 w-1/2 h-[420px]">
-        <Shadow />
-      </div>
+      <Shadow />
       <Step
         goToStep={(step: StepId) => dispatch({ type: "goToStep", step })}
         patchState={(patch: Partial<State>) =>
