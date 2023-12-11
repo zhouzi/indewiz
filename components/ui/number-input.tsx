@@ -13,14 +13,17 @@ export interface NumberInputProps
 const NumberInput = React.forwardRef<
   React.ElementRef<typeof Input>,
   NumberInputProps
->(({ onChange, ...props }, ref) => {
+>(({ onChange, min = -Infinity, max = Infinity, ...props }, ref) => {
   return (
     <Input
       type="text"
       inputMode="numeric"
       pattern="[0-9]*"
       onChange={(event) => {
-        const value = Number(event.currentTarget.value);
+        const value = Math.max(
+          Number(min),
+          Math.min(Number(max), Number(event.currentTarget.value)),
+        );
         if (isNaN(value)) return;
 
         onChange(value);
