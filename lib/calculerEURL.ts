@@ -2,6 +2,8 @@ import Engine from "publicodes";
 import rules from "modele-social";
 
 const eurlEngine = new Engine(rules);
+
+// TODO: use calculerIS
 const isEngine = new Engine(rules);
 
 function calculerEURL({
