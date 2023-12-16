@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/table";
 import { calculerIntêrêts } from "@/lib/calculerIntêrêts";
 import { calculerIS } from "@/lib/calculerIS";
+import { formatNumber } from "@/lib/formatNumber";
 
 type StepId = "yearlyInvestment" | "duration" | "résultat";
 
@@ -266,12 +267,12 @@ const steps = {
                         <span className="text-text-300 font-normal hidden md:inline">
                           Résultat
                         </span>{" "}
-                        {group.finalReturns
-                          .reduce(
+                        {formatNumber(
+                          group.finalReturns.reduce(
                             (acc, transaction) => acc + transaction.value,
                             0,
-                          )
-                          .toLocaleString("fr-FR")}{" "}
+                          ),
+                        )}{" "}
                         €{" "}
                         {group.différence == null ? (
                           <span className="inline-flex items-center gap-1 md:w-[60px]" />
@@ -310,9 +311,11 @@ const steps = {
                               Montant annuel investit
                             </TableHead>
                             <TableHead className="text-right">
-                              {group.yearlyInvestment.reduce(
-                                (acc, transaction) => acc + transaction.value,
-                                0,
+                              {formatNumber(
+                                group.yearlyInvestment.reduce(
+                                  (acc, transaction) => acc + transaction.value,
+                                  0,
+                                ),
                               )}{" "}
                               €/an
                             </TableHead>
@@ -323,7 +326,7 @@ const steps = {
                             <TableRow key={transaction.label}>
                               <TableCell>{transaction.label}</TableCell>
                               <TableCell className="text-right">
-                                {transaction.value} €/an
+                                {formatNumber(transaction.value)} €/an
                               </TableCell>
                             </TableRow>
                           ))}
@@ -336,9 +339,11 @@ const steps = {
                               Valeur finale
                             </TableHead>
                             <TableHead className="text-right">
-                              {group.finalReturns.reduce(
-                                (acc, transaction) => acc + transaction.value,
-                                0,
+                              {formatNumber(
+                                group.finalReturns.reduce(
+                                  (acc, transaction) => acc + transaction.value,
+                                  0,
+                                ),
                               )}{" "}
                               €
                             </TableHead>
@@ -349,7 +354,7 @@ const steps = {
                             <TableRow key={transaction.label}>
                               <TableCell>{transaction.label}</TableCell>
                               <TableCell className="text-right">
-                                {transaction.value} €
+                                {formatNumber(transaction.value)} €
                               </TableCell>
                             </TableRow>
                           ))}

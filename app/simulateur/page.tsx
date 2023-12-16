@@ -33,6 +33,7 @@ import {
   SimulateurQuestion,
   SimulateurQuestionCounter,
 } from "@/components/ui/simulateur";
+import { formatNumber } from "@/lib/formatNumber";
 
 type StepId = "nature" | "ca" | "rémunération" | "résultat";
 
@@ -303,12 +304,14 @@ const steps = {
                         <span className="text-text-300 font-normal hidden md:inline">
                           Résultat
                         </span>{" "}
-                        {[
-                          ...group.compteBancairePro,
-                          ...group.compteBancairePerso,
-                        ].reduce(
-                          (acc, transaction) => acc + transaction.value,
-                          0,
+                        {formatNumber(
+                          [
+                            ...group.compteBancairePro,
+                            ...group.compteBancairePerso,
+                          ].reduce(
+                            (acc, transaction) => acc + transaction.value,
+                            0,
+                          ),
                         )}{" "}
                         €/an{" "}
                         {group.différence == null ? (
@@ -348,9 +351,11 @@ const steps = {
                               Compte bancaire pro
                             </TableHead>
                             <TableHead className="text-right">
-                              {group.compteBancairePro.reduce(
-                                (acc, transaction) => acc + transaction.value,
-                                0,
+                              {formatNumber(
+                                group.compteBancairePro.reduce(
+                                  (acc, transaction) => acc + transaction.value,
+                                  0,
+                                ),
                               )}{" "}
                               €/an
                             </TableHead>
@@ -361,7 +366,7 @@ const steps = {
                             <TableRow key={transaction.label}>
                               <TableCell>{transaction.label}</TableCell>
                               <TableCell className="text-right">
-                                {transaction.value} €/an
+                                {formatNumber(transaction.value)} €/an
                               </TableCell>
                             </TableRow>
                           ))}
@@ -374,9 +379,11 @@ const steps = {
                               Compte bancaire perso
                             </TableHead>
                             <TableHead className="text-right">
-                              {group.compteBancairePerso.reduce(
-                                (acc, transaction) => acc + transaction.value,
-                                0,
+                              {formatNumber(
+                                group.compteBancairePerso.reduce(
+                                  (acc, transaction) => acc + transaction.value,
+                                  0,
+                                ),
                               )}{" "}
                               €/an
                             </TableHead>
@@ -387,7 +394,7 @@ const steps = {
                             <TableRow key={transaction.label}>
                               <TableCell>{transaction.label}</TableCell>
                               <TableCell className="text-right">
-                                {transaction.value} €/an
+                                {formatNumber(transaction.value)} €/an
                               </TableCell>
                             </TableRow>
                           ))}
