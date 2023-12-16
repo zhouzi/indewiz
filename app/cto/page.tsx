@@ -210,12 +210,17 @@ const steps = {
                   })
                 }
                 afterIcon="€/an"
+                min={0}
+                step={1000}
               />{" "}
               sur{" "}
               <InlineNumberInput
                 value={state.duration}
                 onChange={(value) => patchState({ duration: value })}
                 afterIcon="ans"
+                min={0}
+                max={100}
+                step={5}
               />{" "}
               et une performance de{" "}
               <InlineNumberInput
@@ -225,6 +230,9 @@ const steps = {
                     yearlyInterestRate: value / 100,
                   })
                 }
+                min={0}
+                max={100}
+                step={1}
                 afterIcon="%/an"
               />
             </SimulateurDescription>
