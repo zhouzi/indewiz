@@ -34,6 +34,7 @@ import {
   SimulateurQuestionCounter,
 } from "@/components/ui/simulateur";
 import { formatNumber } from "@/lib/formatNumber";
+import { InlineNumberInput } from "@/components/ui/inline-number-input";
 
 type StepId = "nature" | "ca" | "rémunération" | "résultat";
 
@@ -242,49 +243,17 @@ const steps = {
             </div>
             <SimulateurDescription>
               Avec un chiffre d'affaires de{" "}
-              <label className="inline-flex items-center gap-1 cursor-pointer p-1">
-                <span className="text-text border-b-[1px] border-b-text leading-tight">
-                  <input
-                    type="text"
-                    inputMode="numeric"
-                    pattern="[0-9]*"
-                    onChange={(event) => {
-                      const value = Number(event.currentTarget.value);
-                      if (isNaN(value)) return;
-
-                      patchState({ ca: Number(event.target.value) });
-                    }}
-                    onFocus={(event) => event.currentTarget.select()}
-                    value={state.ca}
-                    className="inline bg-transparent focus:outline-none"
-                    style={{ width: `${String(state.ca).length}ch` }}
-                  />
-                  €/an
-                </span>
-                <Pen size={16} />
-              </label>{" "}
+              <InlineNumberInput
+                onChange={(value) => patchState({ ca: value })}
+                value={state.ca}
+                afterIcon="€/an"
+              />{" "}
               et une rémunération net de
-              <label className="inline-flex items-center gap-1 cursor-pointer p-1">
-                <span className="text-text border-b-[1px] border-b-text leading-tight">
-                  <input
-                    type="text"
-                    inputMode="numeric"
-                    pattern="[0-9]*"
-                    onChange={(event) => {
-                      const value = Number(event.currentTarget.value);
-                      if (isNaN(value)) return;
-
-                      patchState({ rémunération: Number(event.target.value) });
-                    }}
-                    onFocus={(event) => event.currentTarget.select()}
-                    value={state.rémunération}
-                    className="inline bg-transparent focus:outline-none"
-                    style={{ width: `${String(state.rémunération).length}ch` }}
-                  />
-                  €/mois
-                </span>
-                <Pen size={16} />
-              </label>
+              <InlineNumberInput
+                onChange={(value) => patchState({ rémunération: value })}
+                value={state.rémunération}
+                afterIcon="€/mois"
+              />
             </SimulateurDescription>
             <div className={cn("flex gap-2 flex-col", stale && "opacity-40")}>
               {groups.map((group) => (

@@ -32,6 +32,7 @@ import {
 import { calculerIntêrêts } from "@/lib/calculerIntêrêts";
 import { calculerIS } from "@/lib/calculerIS";
 import { formatNumber } from "@/lib/formatNumber";
+import { InlineNumberInput } from "@/components/ui/inline-number-input";
 
 type StepId = "yearlyInvestment" | "duration" | "résultat";
 
@@ -201,53 +202,31 @@ const steps = {
             </div>
             <SimulateurDescription>
               En investissant{" "}
-              <label className="inline-flex items-center gap-1 cursor-pointer p-1">
-                <span className="text-text border-b-[1px] border-b-text leading-tight">
-                  <input
-                    type="text"
-                    inputMode="numeric"
-                    pattern="[0-9]*"
-                    onChange={(event) => {
-                      const value = Number(event.currentTarget.value);
-                      if (isNaN(value)) return;
-
-                      patchState({
-                        yearlyInvestment: Number(event.target.value),
-                      });
-                    }}
-                    onFocus={(event) => event.currentTarget.select()}
-                    value={state.yearlyInvestment}
-                    className="inline bg-transparent focus:outline-none"
-                    style={{
-                      width: `${String(state.yearlyInvestment).length}ch`,
-                    }}
-                  />
-                  €/an
-                </span>
-                <Pen size={16} />
-              </label>{" "}
+              <InlineNumberInput
+                value={state.yearlyInvestment}
+                onChange={(value) =>
+                  patchState({
+                    yearlyInvestment: value,
+                  })
+                }
+                afterIcon="€/an"
+              />{" "}
               sur{" "}
-              <label className="inline-flex items-center gap-1 cursor-pointer p-1">
-                <span className="text-text border-b-[1px] border-b-text leading-tight">
-                  <input
-                    type="text"
-                    inputMode="numeric"
-                    pattern="[0-9]*"
-                    onChange={(event) => {
-                      const value = Number(event.currentTarget.value);
-                      if (isNaN(value)) return;
-
-                      patchState({ duration: Number(event.target.value) });
-                    }}
-                    onFocus={(event) => event.currentTarget.select()}
-                    value={state.duration}
-                    className="inline bg-transparent focus:outline-none"
-                    style={{ width: `${String(state.duration).length}ch` }}
-                  />
-                  ans
-                </span>
-                <Pen size={16} />
-              </label>
+              <InlineNumberInput
+                value={state.duration}
+                onChange={(value) => patchState({ duration: value })}
+                afterIcon="ans"
+              />{" "}
+              et une performance de{" "}
+              <InlineNumberInput
+                value={state.yearlyInterestRate * 100}
+                onChange={(value) =>
+                  patchState({
+                    yearlyInterestRate: value / 100,
+                  })
+                }
+                afterIcon="%/an"
+              />
             </SimulateurDescription>
             <div className={cn("flex gap-2 flex-col", stale && "opacity-40")}>
               {groups.map((group) => (

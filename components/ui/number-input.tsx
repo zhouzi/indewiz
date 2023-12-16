@@ -7,13 +7,13 @@ export interface NumberInputProps
     React.ComponentPropsWithoutRef<typeof Input>,
     "type" | "onChange"
   > {
-  onChange: (value: number) => void;
+  onChange?: (value: number) => void;
 }
 
 const NumberInput = React.forwardRef<
   React.ElementRef<typeof Input>,
   NumberInputProps
->(({ onChange, min = -Infinity, max = Infinity, ...props }, ref) => {
+>(({ onChange = () => {}, min = -Infinity, max = Infinity, ...props }, ref) => {
   return (
     <Input
       type="text"
