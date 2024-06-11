@@ -248,7 +248,7 @@ const steps = {
                 value={state.ca}
                 afterIcon="€/an"
               />{" "}
-              et une rémunération net de
+              et une rémunération nette de
               <InlineNumberInput
                 onChange={(value) => patchState({ rémunération: value })}
                 value={state.rémunération}
